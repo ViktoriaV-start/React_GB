@@ -33,14 +33,14 @@ body {
 }
 .chat__messages {
   display: grid;
-  grid-template-columns: 45% 5%;
+  grid-template-columns: 10% 45% 5%;
   grid-column-gap: 1em;
   grid-row-gap: 1em;
   margin-bottom: 1em;
 }
 .chat__inp-wrapper {
   display: grid;
-  grid-template-columns: 45% 10%;
+  grid-template-columns: 10% 45% 10%;
   grid-column-gap: 1em;
 }
 .chat__input {
