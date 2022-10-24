@@ -12,6 +12,13 @@ body {
   margin: 0 auto;
 }
 
+.wrapper {
+  display: grid;
+  grid-template-columns: 65% 30%;
+  column-gap: 5%;
+}
+
+
 .h2 {
   color: green;
 }
@@ -19,3 +26,4 @@ body {
 @import 'form';
 @import 'header';
 @import 'chat';
+@import 'sidebar';
