@@ -1,6 +1,9 @@
 
-import { Chat } from "./Chat";
+import { Chat } from "./chat-components/Chat";
 import {useState} from "react";
+import {RenderTree} from "./RenderTree";
+import {Sidebar} from "./Sidebar";
+import {Button} from "@mui/material";
 
 
 
@@ -14,10 +17,16 @@ export const Main = () => {
                 <div className="header container">LET'S CHAT====</div>
             </header>
 
-            <section className="chat container">
-                <div className="chat__salute">Hello, {name}, welcome to our chat!</div>
-                <Chat/>
-            </section>
+            <div className="wrapper container">
+                <main className="chat">
+                    <div className="chat__salute">Hello, {name}, welcome to our chat!</div>
+                    <Chat/>
+                </main>
+
+                <aside className="sidebar">
+                    <Sidebar />
+                </aside>
+            </div>
         </>
     )
 };

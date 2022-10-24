@@ -7,8 +7,8 @@
 
   &__messages {
     display: grid;
-    grid-template-columns: 10% 45% 5%;
-    grid-column-gap: 1em;
+    grid-template-columns: 18% 60% 10%;
+    grid-column-gap: 2%;
     grid-row-gap: 1em;
     margin-bottom: 1em;
 
@@ -16,8 +16,8 @@
 
   &__inp-wrapper {
     display: grid;
-    grid-template-columns: 10% 45% 10%;
-    grid-column-gap: 1em;
+    grid-template-columns: 18% 60% 18%;
+    grid-column-gap: 2%;
   }
 
   &__input {
@@ -26,20 +26,26 @@
     padding-left: 3px;
   }
 
+  &__input:focus {
+    box-shadow: 0px 0 50px 5px #a9cdcd;
+    border: none;
+    outline: none;
+  }
+
   &__btn {
     width: 100%;
     height: 3em;
     font-size: 11px;
-    color: rgb(74, 74, 74);
+    color: #fff;
     text-transform: uppercase;
     font-weight: 700;
-    background-color: #eee;
+    background-color: #A7BFD9;
     border-color: #eee;
   }
   &__btn:focus {
     box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.16);
     outline: none;
-    background-color: #eaeaea;
+    background-color: #A7BFD9;
   }
   &__btn:hover {
     box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.16);
