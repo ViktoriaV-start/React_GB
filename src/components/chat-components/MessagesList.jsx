@@ -1,4 +1,4 @@
-import {nameRobot} from "../../config/constants";
+import { ROBOT } from "../../config/constants";
 
 
 export const MessagesList = ({messages}) => {
@@ -8,8 +8,7 @@ export const MessagesList = ({messages}) => {
         <div className="chat__messages" key={item.id}>
             <span>{item.author}</span>
             <span>{item.text}</span>
-            { item.author !== nameRobot ? <button className="chat__btn" >Edit</button> : null}
-
+            { item.author !== ROBOT ? <button className="chat__btn" >Edit</button> : null}
         </div>
     )}
     </div>

@@ -1,7 +1,7 @@
 
-export const nameRobot = "Robot";
-export const robotAnswer = {
+export const ROBOT = "Robot";
+export const ANSWER = {
     text: 'Your message has been received',
-    author: nameRobot,
+    author: ROBOT,
     id: `rob-${Date.now()}`,
 };

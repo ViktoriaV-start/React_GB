@@ -1,20 +1,22 @@
 import {useEffect, useState} from "react";
 import { MessagesList } from "./MessagesList"
 import { Form } from "./Form"
-import {nameRobot, robotAnswer} from "../../config/constants";
+import {ROBOT, ANSWER} from "../../config/constants";
+import { Navigate, useParams } from "react-router";
+
+const initMessages = {
+    music: [],
+    food: [],
+    art: [],
+};
 
 export const Chat = () => {
 
-    // const nameRobot = "Robot";
-    // const robotAnswer = {
-    //     text: 'Your message has been received',
-    //     author: nameRobot,
-    //     id: `rob-${Date.now()}`,
-    // };
-
-    const [messages, setMessages] = useState([]);
+    const [messages, setMessages] = useState(initMessages);
     const [msg, setMsg] = useState('');
     const [author, setAuthor] = useState('');
+    const { slug } = useParams();
+    const name = "Guest";
 
     const addMessage = (event) => {
         event.preventDefault();
@@ -23,13 +25,14 @@ export const Chat = () => {
             return;
         }
 
-        setMessages([...messages,
+        setMessages({...messages,
+            [slug]: [...messages[slug],
             {
                 text: msg,
                 author: author ? author : 'Guest',
                 id: `msg-${Date.now()}`,
-            }
-            ]);
+            }]
+        });
 
     };
 
@@ -44,9 +47,10 @@ export const Chat = () => {
 
     useEffect(() => {
         let timeout;
-        if (messages[messages.length-1]?.author !== nameRobot && msg !== '') {
+        const lastMessage = messages[slug]?.[messages[slug]?.length-1];
+        if (lastMessage?.author !== ROBOT && msg !== '') {
                 timeout = setTimeout(() => {
-                    setMessages([...messages, robotAnswer]);
+                    setMessages({...messages, [slug]: [...messages[slug], ANSWER]});
                 }, 1000);
         }
         setMsg('');
@@ -56,19 +60,29 @@ export const Chat = () => {
             clearTimeout(timeout);
         }
 
-    }, [messages]);
+    }, [messages[slug]]);
 
-    return <div className="chat__content">
+    if (!messages[slug]) {
+        return <Navigate to='/chat' replace />
+    }
 
-        <MessagesList messages={messages} />
+    return <main className="chat">
+            <div className="chat__salute">Hello, {name}, welcome to our 
+            <span className="chat__name"> {slug}</span> chat!</div>
+    
+            <div className="chat__content">
 
-        <Form author={author}
-              handleChangeAuthor={handleChangeAuthor}
-              msg={msg}
-              handleChangeMsg={handleChangeMsg}
-              addMessage={addMessage}
-              messages={messages}
-        />
+            <MessagesList messages={messages[slug]} />
 
-    </div>
+            <Form author={author}
+                  handleChangeAuthor={handleChangeAuthor}
+                  msg={msg}
+                  handleChangeMsg={handleChangeMsg}
+                  addMessage={addMessage}
+                  messages={messages}
+            />
+
+            </div>
+        </main>
 }
+

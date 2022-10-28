@@ -4,7 +4,7 @@ html,
 body {
   height: 100%;
   font-family: sans-serif;
-  min-width: 1600px;
+  min-width: 1400px;
 }
 
 .container {
@@ -18,6 +18,15 @@ body {
   column-gap: 5%;
 }
 
+a {
+  text-decoration: none;
+}
+
+.inactive {
+  color: #000000;
+}
+
+
 
 .h2 {
   color: green;
@@ -27,3 +36,16 @@ body {
 @import 'header';
 @import 'chat';
 @import 'sidebar';
+@import 'norm';
+@import 'navigation';
+
+
+.active {
+  color: #3787b3;
+}
+
+.inactive {
+  color: black;
+}
+
+
