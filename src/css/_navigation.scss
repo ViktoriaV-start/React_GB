@@ -1,0 +1,43 @@
+.navigation {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 50px 0;
+
+    & a {
+      position: relative;
+      text-decoration: none;
+      font-size: 14px;
+      line-height: 1.857;
+      color: black;
+      font-weight: bold;
+      text-transform: uppercase;
+      padding-bottom: 15px;
+      padding-right: 23px;
+      padding-left: 23px;
+    }
+    //& a:hover {
+    //  color: $special-color;
+    //}
+    & a:hover::after {
+      content: ' ';
+      display: block;
+      height: 3px;
+      background: $special;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 38px;
+      bottom: 0px;
+    }
+    &__active::after {
+      content: ' ';
+      display: block;
+      height: 3px;
+      background: $special;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 38px;
+      bottom: 0px;
+    }
+  }

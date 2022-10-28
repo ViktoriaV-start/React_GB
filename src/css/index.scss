@@ -4,13 +4,29 @@ html,
 body {
   height: 100%;
   font-family: sans-serif;
-  min-width: 1600px;
+  min-width: 1400px;
 }
 
 .container {
   width: 1140px;
   margin: 0 auto;
 }
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 65% 30%;
+  column-gap: 5%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.inactive {
+  color: #000000;
+}
+
+
 
 .h2 {
   color: green;
@@ -19,3 +35,17 @@ body {
 @import 'form';
 @import 'header';
 @import 'chat';
+@import 'sidebar';
+@import 'norm';
+@import 'navigation';
+
+
+.active {
+  color: #3787b3;
+}
+
+.inactive {
+  color: black;
+}
+
+
