@@ -1,8 +1,11 @@
-import {useEffect, useState} from "react";
+import { useContext, useEffect, useState } from "react";
 import { MessagesList } from "./MessagesList"
 import { Form } from "./Form"
 import {ROBOT, ANSWER} from "../../config/constants";
 import { Navigate, useParams } from "react-router";
+import { MyButton } from "../MyButton";
+import { ThemeContext } from "../ThemeContext";
+
 
 const initMessages = {
     music: [],
@@ -18,6 +21,13 @@ export const Chat = () => {
     const { slug } = useParams();
     const name = "Guest";
 
+    const { toggleTheme } = useContext(ThemeContext);
+    const { theme } = useContext(ThemeContext);
+    
+
+   
+    
+
     const addMessage = (event) => {
         event.preventDefault();
 
@@ -30,7 +40,7 @@ export const Chat = () => {
             {
                 text: msg,
                 author: author ? author : 'Guest',
-                id: `msg-${Date.now()}`,
+                id: `msg-${Date.now()}-${slug}`,
             }]
         });
 
@@ -50,11 +60,18 @@ export const Chat = () => {
         const lastMessage = messages[slug]?.[messages[slug]?.length-1];
         if (lastMessage?.author !== ROBOT && msg !== '') {
                 timeout = setTimeout(() => {
-                    setMessages({...messages, [slug]: [...messages[slug], ANSWER]});
+                    setMessages({...messages, [slug]: [...messages[slug], 
+                        {
+                            text: 'Your message has been received',
+                            author: ROBOT,
+                            id: `rob-${Date.now()}-${slug}`,
+                        }
+                    ]});
                 }, 1000);
         }
         setMsg('');
         setAuthor('');
+        console.log(slug, messages);
 
         return () => {
             clearTimeout(timeout);
@@ -69,6 +86,8 @@ export const Chat = () => {
     return <main className="chat">
             <div className="chat__salute">Hello, {name}, welcome to our 
             <span className="chat__name"> {slug}</span> chat!</div>
+
+            <MyButton func={toggleTheme}>Theme</MyButton>
     
             <div className="chat__content">
 

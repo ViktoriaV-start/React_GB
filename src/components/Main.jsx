@@ -2,6 +2,10 @@
 import { ChatScreen } from "./screens/ChatScreen";
 import { BrowserRouter, Route, Routes, Link, NavLink } from "react-router-dom";
 import { Chat } from "./chat-components/Chat";
+import { MyButton } from "./MyButton";
+import { useState } from "react";
+import { ThemeContext } from "./ThemeContext";
+
 
 
 const Home = () => (
@@ -15,7 +19,22 @@ const Profile = () => (
 
 export const Main = () => {
 
+    const setActive = ({ isActive }) =>(isActive ? "navigation__active" : "inactive");
+    
+    const [theme, setTheme] = useState('dark');
+
+    const toggleTheme = () => {
+        setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
+        console.log(theme);
+    };
+
     return (
+    <ThemeContext.Provider value={{theme: theme, toggleTheme: toggleTheme}}>
+{/* Здесь в value уже передаем не одно значение theme, а объект со значением theme и 
+ссылкой на функцию toggleTheme 
+Возможна такая запись: {theme, changeTheme: toggleTheme}*/}
+
+
         <BrowserRouter>
         {/* <Link to="/">Home</Link>
         <Link to="/chat">Chat</Link> */}
@@ -24,21 +43,23 @@ export const Main = () => {
                 <div className="header container">
                     <span className="header__name">LET'S CHAT====</span>
                     <NavLink to="/profile">
-                        <button className="header__btn" type="submit">Profile</button>
+                        {/* <button className="header__btn" type="submit">Profile</button> */}
+                        <MyButton><></>Profile</MyButton>
                     </NavLink>
                 </div>
             </header>
 
             <nav className="navigation">
-                <NavLink to="/" className={({ isActive }) => (isActive ? "navigation__active" : "inactive")}>Home</NavLink>
-                <NavLink to="/chat" className={({ isActive }) => (isActive ? "navigation__active" : "inactive")}>All Chats</NavLink>
-                <NavLink to="/chat/music" className={({ isActive }) => (isActive ? "navigation__active" : "inactive")}>Music</NavLink>
-                <NavLink to="/chat/food" className={({ isActive }) => (isActive ? "navigation__active" : "inactive")}>Food</NavLink>
-                <NavLink to="/chat/art" className={({ isActive }) => (isActive ? "navigation__active" : "inactive")}>Art</NavLink>
+                <NavLink to="/" className={setActive}>Home</NavLink>
+                <NavLink to="/chat" className={setActive}>All Chats</NavLink>
+                <NavLink to="/chat/music" className={setActive}>Music</NavLink>
+                <NavLink to="/chat/food" className={setActive}>Food</NavLink>
+                <NavLink to="/chat/art" className={setActive}>Art</NavLink>
             </nav>
             <Routes>
                 
                 <Route path="/" element={<Home />} />
+                <Route path="/React_GB" element={<Home />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/chat" element={<ChatScreen />}>
                     <Route path=":slug" element={<Chat />} /> 
@@ -50,5 +71,10 @@ export const Main = () => {
 
             </Routes>
         </BrowserRouter>
+
+        
+        <MyButton func={toggleTheme}>Theme</MyButton>
+        </ThemeContext.Provider>
+        
     );
 }

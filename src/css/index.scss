@@ -3,7 +3,7 @@ $special: rgb(170, 205, 205);
 html,
 body {
   height: 100%;
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
   min-width: 1400px;
 }
 
@@ -32,11 +32,11 @@ a {
   color: green;
 }
 
+@import 'norm';
 @import 'form';
 @import 'header';
 @import 'chat';
 @import 'sidebar';
-@import 'norm';
 @import 'navigation';
 
 

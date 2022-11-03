@@ -12,7 +12,7 @@
     grid-column-gap: 2%;
     grid-row-gap: 1em;
     margin-bottom: 1em;
-
+    align-items: center;
   }
 
   &__inp-wrapper {
@@ -54,6 +54,23 @@
 
   &__name {
     text-transform: capitalize;
+  }
+
+  &__text_light {
+    background-color: #ddf5e8;
+    padding: 6px 0 5px 6px;
+    border-radius: 10% 70% 10% 50%;
+  }
+
+  &__text_dark {
+    background-color: #fbd3c8;
+    padding: 6px 0 5px 6px;
+    border-radius: 10px 30px;
+  }
+
+  &__author_clr {
+    color: #075a87;
+    font-weight: 500;
   }
 
 }

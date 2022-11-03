@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import { NavLink} from 'react-router-dom';
 
 
-export const Chats = ({children}) => {
+export const Chats = ({}) => {
 
     const allChats = [
         {
