@@ -1,55 +1,91 @@
 
-import { Message } from "../components/Message";
-import {useState} from "react";
+import { ChatScreen } from "./screens/ChatScreen";
+import { BrowserRouter, Route, Routes, Link, NavLink } from "react-router-dom";
+import { Chat } from "./chat-components/Chat";
+import { MyButton } from "./MyButton";
+import { useState } from "react";
+import { ThemeContext } from "./ThemeContext";
 
+ import { ProfileScreen } from "./screens/ProfileScreen"; // это компонент профиль
+ import { ProfileEditScreen } from "./screens/ProfileEditScreen";
+
+// ИМПОРТЫ ДЛЯ РЕДАКСА
+import { Provider } from 'react-redux'; // это провайдер из редакса, 
+//в который оборачиваем весь объект, 
+import { store } from "../store"; 
+// это сам стор, который создали в файле src/store/index.jsx
+
+
+const Home = () => (
+    <h4 className="container">HOME PAGE</h4>
+)
 
 export const Main = () => {
 
-    const name = "Guest";
+    const setActive = ({ isActive }) =>(isActive ? "navigation__active" : "inactive");
+    
+    const [theme, setTheme] = useState('dark');
+
+    const toggleTheme = () => {
+        setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
+        console.log(theme);
+    };
 
     return (
-        <>
-            <header className="header-wrapper">
-                <div className="header container">LET'S CHAT====</div>
-            </header>
+        
+    <Provider store={store}> 
+{/* ЭТО ПРОВАЙДЕР РЕДАКСА */}
 
-            <section className="chat container">
-                <div className="chat__salute">Hello, {name}, welcome to our chat!</div>
-                <Message/>
-            </section>
-        </>
+        <ThemeContext.Provider value={{theme: theme, toggleTheme: toggleTheme}}>
+{/* Здесь в value уже передаем не одно значение theme, а объект со значением theme и 
+ссылкой на функцию toggleTheme 
+Возможна такая запись: {theme, changeTheme: toggleTheme}*/}
 
 
+            <BrowserRouter>
+        {/* <Link to="/">Home</Link>
+        <Link to="/chat">Chat</Link> */}
+
+                <header className="header-wrapper">
+                    <div className="header container">
+                        <span className="header__name">LET'S CHAT====</span>
+                        <NavLink to="/profile">
+                            <MyButton><></>Profile</MyButton>
+                        </NavLink>
+                    </div>
+                </header>
+
+                <nav className="navigation">
+                    <NavLink to="/" className={setActive}>Home</NavLink>
+                    <NavLink to="/chats" className={setActive}>All Chats</NavLink>
+                    <NavLink to="/chats/music" className={setActive}>Music</NavLink>
+                    <NavLink to="/chats/food" className={setActive}>Food</NavLink>
+                    <NavLink to="/chats/art" className={setActive}>Art</NavLink>
+                </nav>
+
+                <Routes>
+                
+                    <Route path="/" element={<Home />} />
+                    <Route path="/React_GB" element={<Home />} />
+                    <Route path="/profile" element={<ProfileScreen />} />
+                    <Route path="/chats" element={<ChatScreen />}>
+                        <Route path=":slug" element={<Chat />} /> 
+                    {/* Это то, что идет в <Outlet /> */}
+                    </Route>
+                    <Route path="*" element={<h4>404</h4>} />
+                {/* Если все предыдущие маршруты не подошли по введенному урлу - идет страница с ошибкой 404;
+                Здесь * - это регулярное выражение */}
+
+                </Routes>
+            </BrowserRouter>
+
+        
+            {/* <MyButton func={toggleTheme}>Theme</MyButton> */}
+        </ThemeContext.Provider>
+    </Provider>
+       
+    );
+}
 
 
-    )
-};
-
-
-
-// <div className="form">
-//
-//     <h2 className="h2">Class components</h2>
-//     <CountClass count={10}/>
-//     <div><FormClass /></div>
-//
-//     <h2 className="h2">Func components</h2>
-//     <h3>Компонент Count</h3>
-//     <Count />
-//     <p>***</p>
-//
-//     <h3>Компонент Parent</h3>
-//     <p>{num}</p>
-//     <input onChange={handleChangeName}/>
-//
-//     <h3>Компонент Child</h3>
-//     <Child name={name} handleChangeNum={setNum}/>
-//     {/*передать пропсами имя и ссылку на функцию SetNum для изменения переменной*/}
-//     {/* num под названием handleChangeNum*/}
-//
-//     {array.map((item, idx) => <div key={idx}>{item}</div>)}
-//
-//     <Form />
-//
-// </div>
 
