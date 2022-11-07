@@ -50,7 +50,7 @@ export const Chats = ({}) => {
         <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
             
             {allChats.map((el) => 
-            <NavLink to={`/chat/${el.slug}`} key={el.id}
+            <NavLink to={`/chats/${el.slug}`} key={el.id}
             className={({ isActive }) => (isActive ? "sidebar__active" : "sidebar__inactive")}>
             
             <ListItem alignItems="flex-start">

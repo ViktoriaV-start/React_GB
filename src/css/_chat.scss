@@ -6,6 +6,10 @@
     margin-bottom: 1em;
   }
 
+  &__content {
+    margin-bottom: 3rem;
+  }
+
   &__messages {
     display: grid;
     grid-template-columns: 18% 60% 10%;

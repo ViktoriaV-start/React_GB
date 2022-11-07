@@ -10,7 +10,8 @@ export const Form = ({author, msg, messages, handleChangeAuthor, handleChangeMsg
     return <form className="chat__inp-wrapper" onSubmit={addMessage}>
 
         <input className="chat__input"
-               type="text" value={author}
+               type="text"
+               value={author}
                onChange={handleChangeAuthor}
                placeholder="Name"/>
 

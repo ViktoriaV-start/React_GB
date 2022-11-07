@@ -86,8 +86,6 @@ export const Chat = () => {
     return <main className="chat">
             <div className="chat__salute">Hello, {name}, welcome to our 
             <span className="chat__name"> {slug}</span> chat!</div>
-
-            <MyButton func={toggleTheme}>Theme</MyButton>
     
             <div className="chat__content">
 
@@ -101,6 +99,9 @@ export const Chat = () => {
                   messages={messages}
             />
 
+            </div>
+            <div className={(messages[slug]?.length !== 0) ? "" : "display-none"}>
+              <MyButton func={toggleTheme}>Theme</MyButton>
             </div>
         </main>
 }

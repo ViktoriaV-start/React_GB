@@ -38,7 +38,8 @@ a {
 @import 'chat';
 @import 'sidebar';
 @import 'navigation';
-
+@import 'my-button';
+@import 'profile';
 
 .active {
   color: #3787b3;
@@ -48,4 +49,14 @@ a {
   color: black;
 }
 
+.display-none {
+  display: none;
+}
 
+.hidden {
+  visibility: hidden;
+}
+
+.note {
+  height: 64px;
+}
