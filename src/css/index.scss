@@ -40,6 +40,8 @@ a {
 @import 'navigation';
 @import 'my-button';
 @import 'profile';
+@import 'btn-create';
+@import 'create-chat';
 
 .active {
   color: #3787b3;
@@ -60,3 +62,16 @@ a {
 .note {
   height: 64px;
 }
+
+.chats__delete-wrapper {
+  position: absolute;
+  right: 0;
+  background-color: transparent;
+  border: none;
+  margin-top: 15px;
+}
+
+.chats__delete {
+  color: #A7BFD9;
+}
+

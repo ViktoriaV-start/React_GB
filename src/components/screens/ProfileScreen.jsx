@@ -5,14 +5,15 @@ import { changeName, changeEmail, toggleProfile } from '../../store/profile/acti
 
 import { Edit } from '../profile-components/Edit.jsx';
 import { Profile } from '../profile-components/Profile.jsx';
+import {selectEmail, selectName, selectVisible} from "../../store/profile/selectors";
  
 export const ProfileScreen = () => {
     
   const dispatch = useDispatch();
 
-  const name = useSelector(state => state.name);
-  const email = useSelector(state => state.email);
-  const visible = useSelector(state => state.visible);
+  const name = useSelector(selectName); // лежат в selectors, кроме того - ссылка постоянная, возвращается примитив
+  const email = useSelector(selectEmail);
+  const visible = useSelector(selectVisible);
   const [alert, setAlert] = useState('hidden');
   const [profile, setProfile] = useState(true);
 

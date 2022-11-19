@@ -7,7 +7,7 @@ import { useState } from "react";
 import { ThemeContext } from "./ThemeContext";
 
  import { ProfileScreen } from "./screens/ProfileScreen"; // это компонент профиль
- import { ProfileEditScreen } from "./screens/ProfileEditScreen";
+
 
 // ИМПОРТЫ ДЛЯ РЕДАКСА
 import { Provider } from 'react-redux'; // это провайдер из редакса, 
@@ -28,7 +28,6 @@ export const Main = () => {
 
     const toggleTheme = () => {
         setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
-        console.log(theme);
     };
 
     return (
@@ -69,8 +68,8 @@ export const Main = () => {
                     <Route path="/React_GB" element={<Home />} />
                     <Route path="/profile" element={<ProfileScreen />} />
                     <Route path="/chats" element={<ChatScreen />}>
-                        <Route path=":slug" element={<Chat />} /> 
-                    {/* Это то, что идет в <Outlet /> */}
+                        <Route path=":slug" element={<Chat />} />
+                    {/* Это children, то, что идет в <Outlet /> */}
                     </Route>
                     <Route path="*" element={<h4>404</h4>} />
                 {/* Если все предыдущие маршруты не подошли по введенному урлу - идет страница с ошибкой 404;

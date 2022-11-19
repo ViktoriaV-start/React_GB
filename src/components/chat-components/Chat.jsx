@@ -1,108 +1,141 @@
-import { useContext, useEffect, useState } from "react";
-import { MessagesList } from "./MessagesList"
-import { Form } from "./Form"
-import {ROBOT, ANSWER} from "../../config/constants";
-import { Navigate, useParams } from "react-router";
-import { MyButton } from "../MyButton";
-import { ThemeContext } from "../ThemeContext";
+import {useContext, useEffect, useState} from "react";
+import {Navigate, useParams} from "react-router";
 
+import {MessagesList} from "./MessagesList"
+import {Form} from "./Form"
+import {ANSWER, ROBOT} from "../../config/constants";
 
-const initMessages = {
-    music: [],
-    food: [],
-    art: [],
-};
+import {MyButton} from "../MyButton";
+import {ThemeContext} from "../ThemeContext";
+//import {OutletContext} from "../OutletContext";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { selectRelation } from "../../store/relation/selectors";
+import { selectMessages } from "../../store/messages/selectors";
+import { addChat } from "../../store/chats/actions";
+import { addNewMessage } from "../../store/messages/actions";
+
 
 export const Chat = () => {
 
-    const [messages, setMessages] = useState(initMessages);
-    const [msg, setMsg] = useState('');
-    const [author, setAuthor] = useState('');
-    const { slug } = useParams();
-    const name = "Guest";
 
-    const { toggleTheme } = useContext(ThemeContext);
-    const { theme } = useContext(ThemeContext);
-    
+  // ЭТО КУСОК КОДА - ДАННЫЕ ПЕРЕДАЮТСЯ ИЗ КОНТЕКСТА ИЗ РОДИТЕЛЯ, ПОТОМУ ЧТО В OUTLET НАПРЯМУЮ
+  // НЕ ПОЛУЧАЕТСЯ ПЕРЕДАТЬ ДАННЫЕ ПРОПСАМИ
+  //const messages = (useContext(OutletContext)).messages;
+  //const setMessages = (useContext(OutletContext)).setMessages;
+  //const relation = (useContext(OutletContext)).relation;
 
-   
-    
+  const dispatch = useDispatch();
 
-    const addMessage = (event) => {
-        event.preventDefault();
+  const relation = useSelector(selectRelation);
+  const messages = useSelector(selectMessages);
 
-        if (msg.trim() === '') {
-            return;
-        }
+  const [msg, setMsg] = useState('');
+  const [author, setAuthor] = useState('');
+  const {slug} = useParams(); //взять только значение из приходящего объекта ключ/значение
+  const id = relation[slug]; // взять id из таблицы соответствия по пришедшему слагу
+  const name = "Guest";
 
-        setMessages({...messages,
-            [slug]: [...messages[slug],
-            {
-                text: msg,
-                author: author ? author : 'Guest',
-                id: `msg-${Date.now()}-${slug}`,
-            }]
-        });
+  const {toggleTheme} = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
 
-    };
 
-    const handleChangeMsg = (event) => {
+  const addMessage = (event) => {
+    event.preventDefault();
 
-        setMsg(event.target.value);
-    };
-
-    const handleChangeAuthor = (event) => {
-        setAuthor(event.target.value)
-    };
-
-    useEffect(() => {
-        let timeout;
-        const lastMessage = messages[slug]?.[messages[slug]?.length-1];
-        if (lastMessage?.author !== ROBOT && msg !== '') {
-                timeout = setTimeout(() => {
-                    setMessages({...messages, [slug]: [...messages[slug], 
-                        {
-                            text: 'Your message has been received',
-                            author: ROBOT,
-                            id: `rob-${Date.now()}-${slug}`,
-                        }
-                    ]});
-                }, 1000);
-        }
-        setMsg('');
-        setAuthor('');
-        console.log(slug, messages);
-
-        return () => {
-            clearTimeout(timeout);
-        }
-
-    }, [messages[slug]]);
-
-    if (!messages[slug]) {
-        return <Navigate to='/chat' replace />
+    if (msg.trim() === '') {
+      return;
     }
 
-    return <main className="chat">
-            <div className="chat__salute">Hello, {name}, welcome to our 
-            <span className="chat__name"> {slug}</span> chat!</div>
-    
-            <div className="chat__content">
+    let newMsg = {
+      text: msg,
+      author: author ? author : 'Guest',
+      id: `msg-${Date.now()}-${slug}`,
+    }
 
-            <MessagesList messages={messages[slug]} />
+    dispatch(addNewMessage(id, newMsg));
 
-            <Form author={author}
-                  handleChangeAuthor={handleChangeAuthor}
-                  msg={msg}
-                  handleChangeMsg={handleChangeMsg}
-                  addMessage={addMessage}
-                  messages={messages}
-            />
 
-            </div>
-            <div className={(messages[slug]?.length !== 0) ? "" : "display-none"}>
-              <MyButton func={toggleTheme}>Theme</MyButton>
-            </div>
-        </main>
+    // setMessages({   ...messages, [id]: [...messages[id], {объект с новым сообщением} ]    });
+    // setMessages({...messages, [id]:
+    //     [...messages[id],
+    //     {
+    //      text: msg,
+    //      author: author ? author : 'Guest',
+    //      id: `msg-${Date.now()}-${slug}`,
+    //     }]
+    // });
+
+  };
+
+  const handleChangeMsg = (event) => {
+
+    setMsg(event.target.value);
+  };
+
+  const handleChangeAuthor = (event) => {
+    setAuthor(event.target.value)
+  };
+
+  useEffect(() => {
+    let timeout;
+    const lastMessage = messages[id]?.[messages[id]?.length - 1];
+    if (lastMessage?.author !== ROBOT && msg !== '') {
+      timeout = setTimeout(() => {
+
+        dispatch(addNewMessage(id, {
+          text: 'Your message has been received',
+          author: ROBOT,
+          id: `rob-${Date.now()}-${slug}`,
+        }));
+
+
+        // setMessages({
+        //   ...messages, [id]: [...messages[id],
+        //     {
+        //       text: 'Your message has been received',
+        //       author: ROBOT,
+        //       id: `rob-${Date.now()}-${slug}`,
+        //     }
+        //   ]
+        // });
+      }, 1000);
+    }
+    setMsg('');
+    setAuthor('');
+
+    return () => {
+      clearTimeout(timeout);
+    }
+
+  }, [messages[id]]);
+
+  if (!messages[id]) {
+    return <Navigate to='/chats' replace/>
+  }
+
+
+
+  return <main className="chat">
+    <div className="chat__salute">Hello, {name}, welcome to our
+      <span className="chat__name"> {slug}</span> chat!
+    </div>
+
+    <div className="chat__content">
+
+      <MessagesList messages={messages[id]}/>
+
+      <Form author={author}
+            handleChangeAuthor={handleChangeAuthor}
+            msg={msg}
+            handleChangeMsg={handleChangeMsg}
+            addMessage={addMessage}
+            messages={messages}
+      />
+
+    </div>
+    <div className={(messages[id]?.length !== 0) ? "" : "display-none"}>
+      <MyButton func={toggleTheme}>Theme</MyButton>
+    </div>
+  </main>
 }
 
