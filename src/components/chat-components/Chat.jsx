@@ -11,8 +11,7 @@ import {ThemeContext} from "../ThemeContext";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { selectRelation } from "../../store/relation/selectors";
 import { selectMessages } from "../../store/messages/selectors";
-import { addChat } from "../../store/chats/actions";
-import { addNewMessage } from "../../store/messages/actions";
+import {addNewMessage, deleteMessage} from "../../store/messages/actions";
 
 
 export const Chat = () => {
@@ -26,8 +25,8 @@ export const Chat = () => {
 
   const dispatch = useDispatch();
 
-  const relation = useSelector(selectRelation);
-  const messages = useSelector(selectMessages);
+  const relation = useSelector(selectRelation, shallowEqual);
+  const messages = useSelector(selectMessages, shallowEqual);
 
   const [msg, setMsg] = useState('');
   const [author, setAuthor] = useState('');
@@ -114,6 +113,11 @@ export const Chat = () => {
   }
 
 
+  const deleteMsg = (msgId) => {
+    dispatch(deleteMessage(id, msgId));
+  }
+
+
 
   return <main className="chat">
     <div className="chat__salute">Hello, {name}, welcome to our
@@ -122,7 +126,7 @@ export const Chat = () => {
 
     <div className="chat__content">
 
-      <MessagesList messages={messages[id]}/>
+      <MessagesList messages={messages[id]} deleteMsg={deleteMsg}/>
 
       <Form author={author}
             handleChangeAuthor={handleChangeAuthor}

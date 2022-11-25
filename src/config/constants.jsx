@@ -2,7 +2,7 @@ export const ROBOT = "Robot";
 
 export const INITIAL_CHATS = [
   {
-    id: 1,
+    id: 'chat-1',
     name: "Let's chat about music",
     slug: "music",
     alt: 'M',
@@ -11,7 +11,7 @@ export const INITIAL_CHATS = [
     currentMsg: " I'll be in your neighborhood doing errands this…"
   },
   {
-    id: 2,
+    id: 'chat-2',
     name: "Let's chat about food",
     slug: "food",
     alt: 'F',

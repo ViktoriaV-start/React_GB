@@ -1,5 +1,6 @@
 export const INIT_MESSAGES = 'MESSAGES::INIT_MESSAGES';
 export const ADD_NEW_MESSAGE = 'MESSAGES::ADD_NEW_MESSAGE';
+export const DELETE_MESSAGE = 'MESSAGES::DELETE_MESSAGE';
 
 export const initMessages = (chatId) => ({
   type: INIT_MESSAGES,
@@ -11,5 +12,13 @@ export const addNewMessage = (chatId, newMsg) => ({
   payload: {
     chatId,
     newMsg,
+  }
+});
+
+export const deleteMessage = (chatId, msgId) => ({
+  type: DELETE_MESSAGE,
+  payload: {
+    chatId,
+    msgId,
   }
 });

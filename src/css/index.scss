@@ -8,13 +8,13 @@ body {
 }
 
 .container {
-  width: 1140px;
+  width: 85%;
   margin: 0 auto;
 }
 
 .wrapper {
   display: grid;
-  grid-template-columns: 65% 30%;
+  grid-template-columns: 30% 65%;
   column-gap: 5%;
 }
 

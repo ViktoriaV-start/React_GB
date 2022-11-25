@@ -15,12 +15,14 @@ export const ChatScreen = () => {
 
   <div className="wrapper container">
 
-        <Outlet />
-        {/*ЭТО ТО, ЧТО ПРИХОДИТ ИЗ ВЛОЖЕННОГО РОУТА КАК children - Chat*/}
+
 
         <aside className="sidebar">
           <Chats />
         </aside>
+
+    <Outlet />
+    {/*ЭТО ТО, ЧТО ПРИХОДИТ ИЗ ВЛОЖЕННОГО РОУТА КАК children - Chat*/}
       </div>
   // {/*</OutletContext.Provider>*/}
   )

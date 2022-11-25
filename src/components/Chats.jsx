@@ -11,7 +11,6 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 
-import {MyButton} from "./MyButton";
 
 import { addChat, deleteChat } from "../store/chats/actions";
 import {addRelation, deleteRelation} from "../store/relation/actions";
@@ -51,7 +50,6 @@ export const Chats = () => {
     return messages[id][messages[id].length-2]?.author;
   };
 
-
   function handleChatName(event) {
     let name = event.target.value;
     setChatName(name);
@@ -67,7 +65,6 @@ export const Chats = () => {
       setChatSlug(slug);
       console.log(slug);
     } else {
-
 
       setChatSlug(slug.trim().replaceAll(' ', '-'));
     }
@@ -93,7 +90,6 @@ export const Chats = () => {
     dispatch(addChat(obj));
     dispatch(addRelation(newRelation));
     dispatch(initMessages(obj.id));
-
 
     setChatName("Let's chat about ... ");
     setChatSlug('');
@@ -137,11 +133,11 @@ export const Chats = () => {
                         variant="body2"
                         color="text.primary"
                       >
-                        {/*{getCurrenUser(el.id) ? getCurrenUser(el.id) : el.currentUser}*/}
-                        USER
+                        {getCurrenUser(el.id) ? getCurrenUser(el.id) : el.currentUser}
+
                       </Typography>
-                      {/*{" — " + (getCurrenMsg(el.id) ? getCurrenMsg(el.id) : el.currentMsg)}*/}
-                      message
+                      {" — " + (getCurrenMsg(el.id) ? getCurrenMsg(el.id) : el.currentMsg)}
+
                     </React.Fragment>
                   }
                 />
@@ -165,7 +161,6 @@ export const Chats = () => {
 
             <div className="create-chat__header">
               <span>Create your chat</span>
-              {/*<button className="create-chat__close" onClick={closeForm} type="submit">x</button>*/}
             </div>
 
             <div className="create-chat__form">
@@ -192,9 +187,6 @@ export const Chats = () => {
 
         </List>
       </div>
-
-      {/*<button onClick={openForm} className="btn-create" type="button">Create Chat</button>*/}
-      {/*<form className={ showForm ? "create-chat" : "create-chat display-none" }>*/}
 
     </>
   )
