@@ -3,7 +3,6 @@ import {Navigate, useParams} from "react-router";
 
 import {MessagesList} from "./MessagesList"
 import {Form} from "./Form"
-import {ANSWER, ROBOT} from "../../config/constants";
 
 import {MyButton} from "../MyButton";
 import {ThemeContext} from "../ThemeContext";
@@ -11,7 +10,7 @@ import {ThemeContext} from "../ThemeContext";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { selectRelation } from "../../store/relation/selectors";
 import { selectMessages } from "../../store/messages/selectors";
-import {addNewMessage, deleteMessage} from "../../store/messages/actions";
+import {addMessageWithReply, deleteMessage} from "../../store/messages/actions";
 
 
 export const Chat = () => {
@@ -51,7 +50,9 @@ export const Chat = () => {
       id: `msg-${Date.now()}-${slug}`,
     }
 
-    dispatch(addNewMessage(id, newMsg));
+    dispatch(addMessageWithReply(id, newMsg, slug));
+    setMsg('');
+    setAuthor('');
 
 
     // setMessages({   ...messages, [id]: [...messages[id], {объект с новым сообщением} ]    });
@@ -75,38 +76,6 @@ export const Chat = () => {
     setAuthor(event.target.value)
   };
 
-  useEffect(() => {
-    let timeout;
-    const lastMessage = messages[id]?.[messages[id]?.length - 1];
-    if (lastMessage?.author !== ROBOT && msg !== '') {
-      timeout = setTimeout(() => {
-
-        dispatch(addNewMessage(id, {
-          text: 'Your message has been received',
-          author: ROBOT,
-          id: `rob-${Date.now()}-${slug}`,
-        }));
-
-
-        // setMessages({
-        //   ...messages, [id]: [...messages[id],
-        //     {
-        //       text: 'Your message has been received',
-        //       author: ROBOT,
-        //       id: `rob-${Date.now()}-${slug}`,
-        //     }
-        //   ]
-        // });
-      }, 1000);
-    }
-    setMsg('');
-    setAuthor('');
-
-    return () => {
-      clearTimeout(timeout);
-    }
-
-  }, [messages[id]]);
 
   if (!messages[id]) {
     return <Navigate to='/chats' replace/>

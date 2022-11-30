@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeName, changeEmail, toggleProfile } from '../../store/profile/actions.jsx';
 
@@ -18,6 +18,7 @@ export const ProfileScreen = () => {
   const [profile, setProfile] = useState(true);
 
   const saveVisible = () => {
+
     return dispatch(toggleProfile());
   }
 

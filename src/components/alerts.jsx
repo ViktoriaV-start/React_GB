@@ -12,7 +12,7 @@ export const Error = (props) => {
 
   return (
     <>
-      <Alert severity="error">{props.children}</Alert>
+      <Alert severity="error" onClose={props.func}>{props.children}</Alert>
     </>
   );
 }

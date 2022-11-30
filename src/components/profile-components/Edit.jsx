@@ -84,7 +84,7 @@ export const Edit = ({name,
                  autoFocus={true}
                  required
                  onChange={handleName}
-                 />
+          />
 
           <div className="profile__text">Email:</div>
           <input type="email"

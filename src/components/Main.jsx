@@ -7,12 +7,14 @@ import { useState } from "react";
 import { ThemeContext } from "./ThemeContext";
 
  import { ProfileScreen } from "./screens/ProfileScreen"; // это компонент профиль
+ import { FunScreen } from "./screens/FunScreen";
 
 
 // ИМПОРТЫ ДЛЯ РЕДАКСА
 import { Provider } from 'react-redux'; // это провайдер из редакса, 
 //в который оборачиваем весь объект, 
-import { store } from "../store"; 
+import { persistor, store } from "../store"; 
+import { PersistGate } from "redux-persist/integration/react";
 // это сам стор, который создали в файле src/store/index.jsx
 
 
@@ -22,18 +24,22 @@ const Home = () => (
 
 export const Main = () => {
 
-    const setActive = ({ isActive }) =>(isActive ? "navigation__active" : "inactive");
+  const setActive = ({ isActive }) =>(isActive ? "navigation__active" : "inactive");
     
-    const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState('dark');
 
-    const toggleTheme = () => {
-        setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
     };
 
-    return (
+  return (
         
-    <Provider store={store}> 
-{/* ЭТО ПРОВАЙДЕР РЕДАКСА */}
+    <PersistGate persistor={persistor}>
+      {/* ЭТО ДЛЯ LOCAL-STORAGE */}
+
+
+      <Provider store={store}> 
+        {/* ЭТО ПРОВАЙДЕР РЕДАКСА */}
 
         <ThemeContext.Provider value={{theme: theme, toggleTheme: toggleTheme}}>
 {/* Здесь в value уже передаем не одно значение theme, а объект со значением theme и 
@@ -60,6 +66,7 @@ export const Main = () => {
                     <NavLink to="/chats/music" className={setActive}>Music</NavLink>
                     <NavLink to="/chats/food" className={setActive}>Food</NavLink>
                     <NavLink to="/chats/art" className={setActive}>Art</NavLink>
+                    <NavLink to="/fun" className={setActive}>Fun</NavLink>
                 </nav>
 
                 <Routes>
@@ -67,6 +74,7 @@ export const Main = () => {
                     <Route path="/" element={<Home />} />
                     <Route path="/React_GB" element={<Home />} />
                     <Route path="/profile" element={<ProfileScreen />} />
+                    <Route path="/fun" element={<FunScreen />} />
                     <Route path="/chats" element={<ChatScreen />}>
                         <Route path=":slug" element={<Chat />} />
                     {/* Это children, то, что идет в <Outlet /> */}
@@ -81,7 +89,10 @@ export const Main = () => {
         
             {/* <MyButton func={toggleTheme}>Theme</MyButton> */}
         </ThemeContext.Provider>
+
     </Provider>
+
+    </PersistGate>
        
     );
 }

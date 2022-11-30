@@ -1,4 +1,8 @@
+
 export const ROBOT = "Robot";
+export const API_URL_ART = "https://animechan.vercel.app/api/random/anime?title=naruto";
+
+export const API = "https://ghibliapi.herokuapp.com";
 
 export const INITIAL_CHATS = [
   {
@@ -41,3 +45,12 @@ export const SLUG_ID = INITIAL_CHATS.reduce((acc, chat) => {
   return acc;
 }, {});
 
+export const FETCH_STATUSES = {
+  IDLE: 'idle',
+  REQUEST: 'request',
+  FAILURE: 'failure',
+  SUCCESS: 'success',
+}
+
+
+export const apiUrl = "https://api.spaceflightnewsapi.net/v3/artiles";
