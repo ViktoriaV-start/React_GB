@@ -1,0 +1,39 @@
+.create-chat {
+  padding: 20px;
+  background-color: #eff7f7;
+  //position: absolute;
+  //top: 50%;
+  //left: 50%;
+  //margin: 0 0 0 -20%;
+  box-shadow: 0px 0 50px 5px #a9cdcd;
+
+  &__form {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 15px;
+    font-size: 0.8em;
+  }
+
+  &__header {
+    //position: relative;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color:#3787b3;
+  }
+
+  //&__close {
+  //  position: absolute;
+  //  right: 0;
+  //  border-radius: 50%;
+  //  background-color: #A7BFD9;
+  //  color: #fff;
+  //  border: 1px solid #A7BFD9;
+  //}
+
+  &__input {
+    padding: 5px 0 5px 5px;
+    height: 2em;
+    font-size: 1.2em;
+  }
+
+}
