@@ -31,13 +31,10 @@ let timeout;
 export const addMessageWithReply = (chatId, newMsg, slug) => (dispatch) => {
   dispatch(addNewMessage(chatId, newMsg));
 
-
-  // let timeout;
-
   if (newMsg.author !== ROBOT) {
 
     if (timeout) {
-      clearTimeout(timeout); //TODO ПРОВЕРИТЬ
+      clearTimeout(timeout);
     }
 
     timeout = setTimeout(() => {
@@ -49,12 +46,4 @@ export const addMessageWithReply = (chatId, newMsg, slug) => (dispatch) => {
 
     }, 1000);
   }
-    
-
-    
-
-
-
-
-
-}
+};

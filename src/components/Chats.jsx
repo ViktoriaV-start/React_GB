@@ -1,28 +1,26 @@
 import * as React from 'react';
-import {NavLink} from 'react-router-dom';
 import { useState } from "react";
-import {shallowEqual, useDispatch, useSelector} from "react-redux";
-
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
-
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 
 import { addChat, deleteChat } from "../store/chats/actions";
-import {addRelation, deleteRelation} from "../store/relation/actions";
+import { addRelation, deleteRelation } from "../store/relation/actions";
 import { selectChats } from "../store/chats/selectors";
-import {selectRelation} from "../store/relation/selectors";
-import {selectMessages} from "../store/messages/selectors";
-import {initMessages} from "../store/messages/actions";
+import { selectRelation } from "../store/relation/selectors";
+import { selectMessages } from "../store/messages/selectors";
+import { initMessages } from "../store/messages/actions";
+import { ChatsMarkup } from './chats-components/ChatsMarkup';
 
 
 
 
 export const Chats = () => {
+
+  const alertMessages = {
+    'empty': 'Enter correct name/ short name',
+    'duplicateName': 'Enter another name',
+    'duplicateSlug': 'Enter another short name',
+    'other': 'Something goes wrong. Try later!'
+  };
 
   const dispatch = useDispatch();
 
@@ -32,13 +30,10 @@ export const Chats = () => {
   const messages = useSelector(selectMessages, shallowEqual);
 
   //const [newChat, setNewChat] = useState({});
-  const [chatName, setChatName] = useState("Let's chat about ... ");
+  const [chatName, setChatName] = useState("Let's chat about ...");
   const [chatSlug, setChatSlug] = useState('new-chat');
-
-
-  // const [showForm, setShowForm] = useState(false);
-  // const closeForm = () => setShowForm(false);
-  // const openForm = () => setShowForm(true);
+  const [alert, setAlert] = useState('hidden');
+  const [alertText, setAlertText] = useState('');
 
   const getCurrenMsg = (id) => {
     if (messages[id].length <= 1) return false;
@@ -58,20 +53,51 @@ export const Chats = () => {
   function handleChatSlug(event) {
     let slug = event.target.value;
 
-    if (slug.trim() === '') {
-      let arrayName = chatName.split(' ');
-      let idx = Math.floor(Math.random() * arrayName.length);
-      slug = arrayName[idx];
-      setChatSlug(slug);
-      console.log(slug);
-    } else {
+    setChatSlug(slug.trim().replaceAll(' ', '-'));
+  }
 
-      setChatSlug(slug.trim().replaceAll(' ', '-'));
+  const showAlert = (text = 'other') => {
+    setAlertText(text);
+    setAlert('');
+  }
+
+  const checkData = () => {
+    
+    if (chatName === '' || chatSlug === '') {
+      showAlert(alertMessages['empty']);
+      return false;
+    } 
+
+    let arrNames = [];
+    let arrSlugs = [];
+
+    chats.map((elem) => {
+      arrNames.push(elem.name);
+        })
+    chats.map((elem) => {
+      arrSlugs.push(elem.slug);
+        })
+
+    if (arrNames.includes(chatName)) {
+      showAlert(alertMessages['duplicateName']);
+      return false;
     }
+
+    if (arrSlugs.includes(chatSlug)) {
+      showAlert(alertMessages['duplicateSlug']);
+      return false;
+    }
+    
+    return true;
+
   }
 
   // ********************* ДОБАВЛЕНИЕ НОВОГО ЧАТА
   const addNewChat = () => {
+
+    setAlert('hidden');
+
+    if (!checkData()) return;
 
     let id = `chat-${Date.now()}`;
 
@@ -91,103 +117,40 @@ export const Chats = () => {
     dispatch(addRelation(newRelation));
     dispatch(initMessages(obj.id));
 
-    setChatName("Let's chat about ... ");
+    setChatName('');
     setChatSlug('');
+
   }
 
   // ******************************** УДАЛЕНИЕ ЧАТА
-  const delChat = (ev) => {
+  const delChat = (chatId) => {
+
 
     let idSlugRelation = {};
 
     Object.entries(relation).forEach(([key, value]) => {
       idSlugRelation[value] = key;
     })
+   
+    let needleSlug = idSlugRelation[chatId];
 
-    let needleSlug = idSlugRelation[ev.target.dataset['id']];
     dispatch(deleteRelation(needleSlug));
-    dispatch(deleteChat(ev.target.dataset['id']));
+    dispatch(deleteChat(chatId));
   }
 
   return (
-    <>
-      <div>
-        <List sx={{width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
-
-          {chats.map((el) => (
-            <NavLink to={`/chats/${el.slug}`} key={el.id}
-                     className={({isActive}) => (isActive ? "sidebar__active" : "sidebar__inactive")}>
-
-              <ListItem alignItems="flex-start">
-                <ListItemAvatar>
-                  <Avatar alt={el.alt} src={el.avatar}/>
-
-                </ListItemAvatar>
-                <ListItemText
-                  primary={el.name}
-                  secondary={
-                    <React.Fragment>
-                      <Typography
-                        sx={{display: 'inline'}}
-                        component="span"
-                        variant="body2"
-                        color="text.primary"
-                      >
-                        {getCurrenUser(el.id) ? getCurrenUser(el.id) : el.currentUser}
-
-                      </Typography>
-                      {" — " + (getCurrenMsg(el.id) ? getCurrenMsg(el.id) : el.currentMsg)}
-
-                    </React.Fragment>
-                  }
-                />
-
-                <button className="chats__delete-wrapper" onClick={delChat} type="submit" data-id={el.id}>
-                  <svg onClick={delChat} className="chats__delete" data-id={el.id} fill="currentColor" height="15"
-                       width="15" viewBox="0 0 512 512">
-                    <path data-id={el.id} onClick={delChat}
-                          d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z"></path>
-                  </svg>
-                </button>
-
-              </ListItem>
-              <Divider variant="inset" component="li"/>
-
-            </NavLink>
-
-          ))}
-
-          <form className="create-chat">
-
-            <div className="create-chat__header">
-              <span>Create your chat</span>
-            </div>
-
-            <div className="create-chat__form">
-
-              <span>Chat name</span>
-              <input className="create-chat__input"
-                     type="text"
-                     value={chatName}
-                     onChange={handleChatName}
-              />
-
-              <span>Chat name shortly</span>
-              <input className="create-chat__input"
-                // ref={inputRef}
-                     type="text"
-                     value={chatSlug}
-                     onChange={handleChatSlug}
-              />
-
-              <button onClick={addNewChat} className="chat__btn" type="button">Save</button>
-
-            </div>
-          </form>
-
-        </List>
-      </div>
-
-    </>
+    <ChatsMarkup 
+      chats={chats}
+      chatName={chatName}
+      handleChatName={handleChatName}
+      chatSlug={chatSlug}
+      handleChatSlug={handleChatSlug}
+      addNewChat={addNewChat}
+      alert={alert}
+      alertText={alertText}
+      getCurrenUser={getCurrenUser}
+      getCurrenMsg={getCurrenMsg}
+      delChat={delChat}
+       />
   )
 }

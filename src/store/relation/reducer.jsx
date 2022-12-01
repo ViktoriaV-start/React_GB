@@ -10,8 +10,8 @@ export const relationReducer = (state = initialState, { payload, type }) => {
             return {...state, ...payload};
         }
         case DELETE_RELATION: {
-            delete state[payload];
-            return state;
+          delete state[payload];
+            return {...state};
         }
         default:
             return state;

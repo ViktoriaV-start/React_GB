@@ -3,7 +3,7 @@ import { INITIAL_CHATS } from "../../config/constants";
 
 const initialState = INITIAL_CHATS;
  
-export const chatsReducer = (state = initialState, {payload, type}) => {
+export const chatsReducer = (state = initialState, { payload, type }) => {
     switch(type) {
         case ADD_CHAT: {
             return [...state, payload];

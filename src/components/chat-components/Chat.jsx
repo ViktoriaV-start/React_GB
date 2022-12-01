@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from "react";
-import {Navigate, useParams} from "react-router";
+import { Navigate, useParams } from "react-router";
 
 import {MessagesList} from "./MessagesList"
 import {Form} from "./Form"
@@ -35,7 +35,6 @@ export const Chat = () => {
 
   const {toggleTheme} = useContext(ThemeContext);
   const {theme} = useContext(ThemeContext);
-
 
   const addMessage = (event) => {
     event.preventDefault();
@@ -88,27 +87,29 @@ export const Chat = () => {
 
 
 
-  return <main className="chat">
-    <div className="chat__salute">Hello, {name}, welcome to our
-      <span className="chat__name"> {slug}</span> chat!
-    </div>
+  return (
+    <main className="chat">
+      <div className="chat__salute">Hello, {name}, welcome to our
+        <span className="chat__name"> {slug}</span> chat!
+      </div>
 
-    <div className="chat__content">
+      <div className="chat__content">
 
-      <MessagesList messages={messages[id]} deleteMsg={deleteMsg}/>
+        <MessagesList messages={messages[id]} deleteMsg={deleteMsg}/>
 
-      <Form author={author}
+        <Form author={author}
             handleChangeAuthor={handleChangeAuthor}
             msg={msg}
             handleChangeMsg={handleChangeMsg}
             addMessage={addMessage}
             messages={messages}
-      />
+        />
 
-    </div>
-    <div className={(messages[id]?.length !== 0) ? "" : "display-none"}>
-      <MyButton func={toggleTheme}>Theme</MyButton>
-    </div>
-  </main>
+      </div>
+      <div className={(messages[id]?.length !== 0) ? "" : "display-none"}>
+        <MyButton func={toggleTheme}>Theme</MyButton>
+      </div>
+    </main>
+  )
 }
 
