@@ -1,4 +1,4 @@
-import { apiUrl, API_URL_ART } from "../../config/constants";
+import { API_URL_ART } from "../../config/constants";
 
 export const GET_ARTICLES_REQUEST = "ARTICLES::GET_ARTICLES_REQUEST";
 export const GET_ARTICLES_SUCCESS = "ARTICLES::GET_ARTICLES_SUCCESS";
@@ -23,11 +23,13 @@ export const getArticles = () => async (dispatch) => {
     dispatch(getArticlesRequest());
 
     const response = await fetch(API_URL_ART);
+    console.log(response);
     if (!response.ok) {
       throw new Error(`Response failed with status ${response.status}`);
     }
 
     const result = await response.json();
+    console.log(result);
     dispatch(getArticlesSuccess(result));
   } catch (e) {
     console.log(e);

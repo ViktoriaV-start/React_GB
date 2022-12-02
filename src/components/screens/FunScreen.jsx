@@ -1,12 +1,11 @@
 import { CircularProgress } from "@mui/material";
-import { useEffect } from "react";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FETCH_STATUSES } from "../../config/constants";
-import { getArticles } from "../../store/articles/actions";
+import { getArticles, getArticlesFailure } from "../../store/articles/actions";
 
 import { selectArticles, selectArticlesError, selectArticlesStatus } from "../../store/articles/selectors";
 import { Error } from "../alerts";
+import { MyButton } from "../MyButton";
 
 
 
@@ -19,12 +18,9 @@ export const FunScreen = () => {
 
 
   const sendRequest = () => {
+    closeAlert();
     dispatch(getArticles());
   };
-
-  // const closeAlert = () => {
-  //   dispatch(false);
-  // }
 
 
   // useEffect(() => {
@@ -32,27 +28,43 @@ export const FunScreen = () => {
   // }, []);
 
 
+  const closeAlert = () => {
+    dispatch(getArticlesFailure(null));
+  }
 
   return (
   <div className="container">
 
+    {error && <Error closeAlert={closeAlert}>Something went wrong... Try later!</Error>}
 
-    
-    {error && <Error>Something went wrong... Try later!</Error>}
- 
-    <img src="/React_GB/img/naruto.jpg" alt="Naruto"></img>
-    <h1 onClick={sendRequest}>hhh</h1>
-    {status === FETCH_STATUSES.REQUEST && <CircularProgress />}
 
-    
-      <div>
-        <span>{articles.character}</span>
-        <span>{articles.quote}</span>
+    <div className="fun">
+
+      <div className="fun__quote">
+        <img className="fun__logo" src="/React_GB/img/naruto1_logo.webp" alt="Naruto"></img>
+
+        <div>
+          <div className="fun__character">{articles.character}</div>
+          <p className="fun__text">{articles.quote}</p>
+          
+        </div>
+
+        
+        <div className="fun__btn">
+          <MyButton func={sendRequest}>New quote</MyButton>
+        </div>
+
+        <div className="fun__progress">
+          {status === FETCH_STATUSES.REQUEST && <CircularProgress color='primary'/>}
+        </div>
+        
       </div>
-    
-    
   
+      <img className="fun__img" src="/React_GB/img/naruto.webp" alt="Naruto"></img>  
+
+    </div>  
   </div>
+
   
   )
 }

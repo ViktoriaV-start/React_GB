@@ -8,7 +8,7 @@ body {
 }
 
 .container {
-  width: 85%;
+  width: 1140px;
   margin: 0 auto;
 }
 
@@ -42,6 +42,7 @@ a {
 @import 'profile';
 @import 'btn-create';
 @import 'create-chat';
+@import 'fun';
 
 .active {
   color: #3787b3;

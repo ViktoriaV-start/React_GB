@@ -1,0 +1,52 @@
+.fun {
+  display: flex;
+  padding: 30px;
+  
+
+  &__img {
+    width: 580px;
+  }
+
+  &__logo {
+    width: 300px;
+  }
+
+  &__quote {
+    position: relative;
+    width: 510px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 20px;
+  }
+
+  &__character {
+    margin-top: 200px;
+    font-size: 25px;
+  }
+  &__text{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-size: 22px;
+    font-weight: 400;
+  }
+
+  &__progress {
+    position: absolute;
+    top: 780px;
+    left: 280px;
+  }
+
+  &__btn {
+    position: absolute;
+    top: 780px;
+    left: 20px;
+  }
+
+  &__video {
+    margin-top: 50px;
+    margin-left: 290px;
+  }
+
+}
+

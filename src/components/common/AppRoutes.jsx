@@ -12,7 +12,7 @@ export const AppRoutes = () => {
       <Route path="/" element={<Home />} />
       <Route path="/React_GB" element={<Home />} />
       <Route path="/profile" element={<ProfileScreen />} />
-      {/* <Route path="/fun" element={<FunScreen />} /> */}
+      <Route path="/fun" element={<FunScreen />} />
   
       <Route path="/chats" element={<ChatScreen />}>
         <Route path=":slug" element={<Chat />} />
