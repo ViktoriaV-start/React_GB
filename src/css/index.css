@@ -1,8 +1,8 @@
 html,
 body {
   height: 100%;
-  font-family: sans-serif;
-  min-width: 1600px;
+  font-family: "Roboto", sans-serif;
+  min-width: 1400px;
 }
 
 .container {
@@ -10,8 +10,161 @@ body {
   margin: 0 auto;
 }
 
+.wrapper {
+  display: grid;
+  grid-template-columns: 65% 30%;
+  -moz-column-gap: 5%;
+       column-gap: 5%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.inactive {
+  color: #000000;
+}
+
 .h2 {
   color: green;
+}
+
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 .data {
@@ -19,52 +172,142 @@ body {
 }
 
 .header-wrapper {
-  background-color: #aacdcd;
-  margin: 5px 0 50px 0;
+  background-color: rgb(170, 205, 205);
+  margin: 0 0 50px 0;
+  padding: 2em 0;
+  color: rgb(239, 247, 247);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+.header__name {
   font-size: 30px;
-  padding: 1em 0;
-  color: #eff7f7;
+  color: rgb(239, 247, 247);
+}
+.header__btn {
+  width: 130px;
+  height: 38px;
+  align-self: center;
+  border-color: #A7BFD9;
+  border-radius: 3px;
+  font-size: 15px;
+  margin-left: 11px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 700;
+  background-color: #A7BFD9;
+}
+.header__btn:focus {
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.16);
+  outline: none;
+  background-color: #A7BFD9;
+}
+.header__btn:hover {
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.16);
 }
 
 .chat__salute {
-  font-size: 1.5em;
-  color: #95bdbd;
+  font-size: 2em;
+  color: #3787b3;
   margin-bottom: 1em;
 }
 .chat__messages {
   display: grid;
-  grid-template-columns: 45% 5%;
-  grid-column-gap: 1em;
+  grid-template-columns: 18% 60% 10%;
+  grid-column-gap: 2%;
   grid-row-gap: 1em;
   margin-bottom: 1em;
 }
 .chat__inp-wrapper {
   display: grid;
-  grid-template-columns: 45% 10%;
-  grid-column-gap: 1em;
+  grid-template-columns: 18% 60% 18%;
+  grid-column-gap: 2%;
 }
 .chat__input {
   height: 2em;
   font-size: 1em;
   padding-left: 3px;
 }
+.chat__input:focus {
+  box-shadow: 0px 0 50px 5px #a9cdcd;
+  border: none;
+  outline: none;
+}
 .chat__btn {
   width: 100%;
   height: 3em;
   font-size: 11px;
-  color: #4a4a4a;
+  color: #fff;
   text-transform: uppercase;
   font-weight: 700;
-  background-color: #eee;
+  background-color: #A7BFD9;
   border-color: #eee;
 }
 .chat__btn:focus {
   box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.16);
   outline: none;
-  background-color: #eaeaea;
+  background-color: #A7BFD9;
 }
 .chat__btn:hover {
   box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.16);
 }
+.chat__name {
+  text-transform: capitalize;
+}
 
-/*# sourceMappingURL=index.css.map */
+.sidebar__active {
+  color: #3787b3;
+}
+.sidebar__inactive {
+  color: black;
+}
+
+.navigation {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 50px 0;
+}
+.navigation a {
+  position: relative;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 1.857;
+  color: black;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding-bottom: 15px;
+  padding-right: 23px;
+  padding-left: 23px;
+}
+.navigation a:hover::after {
+  content: " ";
+  display: block;
+  height: 3px;
+  background: rgb(170, 205, 205);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 38px;
+  bottom: 0px;
+}
+.navigation__active::after {
+  content: " ";
+  display: block;
+  height: 3px;
+  background: rgb(170, 205, 205);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 38px;
+  bottom: 0px;
+}
+
+.active {
+  color: #3787b3;
+}
+
+.inactive {
+  color: black;
+}/*# sourceMappingURL=index.css.map */

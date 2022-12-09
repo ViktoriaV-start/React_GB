@@ -1,7 +1,58 @@
 .header-wrapper {
   background-color: $special;
-  margin: 5px 0 50px 0;
-  font-size: 30px;
-  padding: 1em 0;
+  margin: 0 0 50px 0;
+  padding: 2em 0;
   color: rgb(239, 247, 247);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  &__name {
+    font-size: 30px;
+    color: rgb(239, 247, 247);
+  }
+
+  &__btn {
+    width: 130px;
+    height: 38px;
+    align-self: center;
+    border-color: #A7BFD9;
+    border-radius: 3px;
+    font-size: 15px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: 700;
+    background-color: #A7BFD9;
+  }
+
+  &__btn:focus {
+    box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.16);
+    outline: none;
+    background-color: #A7BFD9;
+  }
+  &__btn:hover {
+    box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.16);
+  }
+
+  &__icon {
+    width: 20px;
+    fill: white;
+  }
+
+  &__btns {
+    display: flex;
+  }
+
+  &__out {
+    margin-left: 20px;
+    align-self: center;
+    cursor: pointer;
+  }
+  &__icon:hover {
+    box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.16);
+  
+ fill: rgb(223, 26, 98);
+  }
 }
