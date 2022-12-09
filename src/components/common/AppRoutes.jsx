@@ -1,17 +1,32 @@
 import { Route, Routes } from "react-router"
-import { Home } from "../../App"
+
 import { Chat } from "../chat-components/Chat"
+import { PrivateRoute } from "../PrivateRoute/PrivateRoute"
+import { PublicRoute } from "../PublicRoute/PublicRoute"
 import { ChatScreen } from "../screens/ChatScreen"
 import { FunScreen } from "../screens/FunScreen"
+import { HomeScreen } from "../screens/HomeScreen"
 import { ProfileScreen } from "../screens/ProfileScreen"
 
 
-export const AppRoutes = () => {
+export const AppRoutes = ({ authed }) => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/React_GB" element={<Home />} />
-      <Route path="/profile" element={<ProfileScreen />} />
+
+      <Route path="/" element={<PublicRoute authed={authed} />}>
+        <Route path="" element={<HomeScreen />} />
+        <Route path="signup" element={<HomeScreen  />} />
+      </Route>
+
+      <Route path="/React_GB" element={<PublicRoute authed={authed} />}>
+        <Route path="" element={<HomeScreen />} />
+        <Route path="signup" element={<HomeScreen />} />
+      </Route>
+
+      <Route path="/profile" element={<PrivateRoute authed={authed} />}>
+        <Route path="" element={<ProfileScreen />} />
+      </Route>
+
       <Route path="/fun" element={<FunScreen />} />
   
       <Route path="/chats" element={<ChatScreen />}>

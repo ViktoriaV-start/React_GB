@@ -21,6 +21,8 @@ export const MessagesList = ({ messages, deleteMsg }) => {
     }
   };
 
+ 
+
   return <div className="chat__list">
     {messages.map((item) =>
       <div className="chat__messages" key={item.id}>

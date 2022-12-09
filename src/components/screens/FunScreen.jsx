@@ -1,4 +1,5 @@
 import { CircularProgress } from "@mui/material";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FETCH_STATUSES } from "../../config/constants";
 import { getArticles, getArticlesFailure } from "../../store/articles/actions";
@@ -23,9 +24,9 @@ export const FunScreen = () => {
   };
 
 
-  // useEffect(() => {
-  //   sendRequest();
-  // }, []);
+  useEffect(() => {
+    sendRequest();
+  }, []);
 
 
   const closeAlert = () => {
@@ -65,7 +66,6 @@ export const FunScreen = () => {
     </div>  
   </div>
 
-  
   )
 }
 

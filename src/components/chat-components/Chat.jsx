@@ -10,7 +10,9 @@ import {ThemeContext} from "../ThemeContext";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { selectRelation } from "../../store/relation/selectors";
 import { selectMessages } from "../../store/messages/selectors";
-import {addMessageWithReply, deleteMessage} from "../../store/messages/actions";
+import {addMessageWithReply, deleteMessage, updateMessages} from "../../store/messages/actions";
+import { getMsgsRefById, messagesRef, getMsgsListRefById, getUserNameRefById, auth } from "../../services/firebase";
+import { onValue, set, push } from "firebase/database";
 
 
 export const Chat = () => {
@@ -22,16 +24,25 @@ export const Chat = () => {
   //const setMessages = (useContext(OutletContext)).setMessages;
   //const relation = (useContext(OutletContext)).relation;
 
+  
+  // dispatch(addMessageWithReply(id, newMsg, slug));
+
+
+
   const dispatch = useDispatch();
 
   const relation = useSelector(selectRelation, shallowEqual);
-  const messages = useSelector(selectMessages, shallowEqual);
-
+  //const [messages, setMessages] = useState([]);
+  const messagesStore = useSelector(selectMessages, shallowEqual); 
+  
   const [msg, setMsg] = useState('');
   const [author, setAuthor] = useState('');
   const {slug} = useParams(); //взять только значение из приходящего объекта ключ/значение
   const id = relation[slug]; // взять id из таблицы соответствия по пришедшему слагу
   const name = "Guest";
+
+  const messages = messagesStore[id];
+  const [userName, setUserName] = useState('');
 
   const {toggleTheme} = useContext(ThemeContext);
   const {theme} = useContext(ThemeContext);
@@ -45,25 +56,14 @@ export const Chat = () => {
 
     let newMsg = {
       text: msg,
-      author: author ? author : 'Guest',
+      author: userName ? userName : 'Guest',
       id: `msg-${Date.now()}-${slug}`,
     }
 
-    dispatch(addMessageWithReply(id, newMsg, slug));
+    push(getMsgsListRefById(id), newMsg)
+
     setMsg('');
     setAuthor('');
-
-
-    // setMessages({   ...messages, [id]: [...messages[id], {объект с новым сообщением} ]    });
-    // setMessages({...messages, [id]:
-    //     [...messages[id],
-    //     {
-    //      text: msg,
-    //      author: author ? author : 'Guest',
-    //      id: `msg-${Date.now()}-${slug}`,
-    //     }]
-    // });
-
   };
 
   const handleChangeMsg = (event) => {
@@ -76,16 +76,52 @@ export const Chat = () => {
   };
 
 
-  if (!messages[id]) {
+  useEffect(() => {
+    const unsubscribe = onValue(getMsgsRefById(id), (snapshot) => {
+
+      const val = snapshot.val();
+      if (!snapshot.val()?.exists) {
+        console.log('error loading');
+      } else {
+        
+        dispatch(updateMessages(id, (Object.values(val.messagesList || {}))));
+      }
+    });
+    return unsubscribe;
+  }, [slug]);
+
+
+  useEffect(() => {
+
+    if (auth.currentUser) {
+      const unsubscribe = onValue(getUserNameRefById(), (snapshot) => {
+
+        const val = snapshot.val();
+
+        console.log(val)
+  
+        setUserName(val);
+     });
+      return unsubscribe;
+    }
+
+  }, [msg]);
+
+
+  // if (!messages[id]) {
+  //   return <Navigate to='/chats' replace/>
+  // }
+  if (!id) {
     return <Navigate to='/chats' replace/>
   }
-
+  //  if (!messages) {
+  //   return <Navigate to='/chats' replace/>
+  // }
+  
 
   const deleteMsg = (msgId) => {
     dispatch(deleteMessage(id, msgId));
   }
-
-
 
   return (
     <main className="chat">
@@ -95,7 +131,8 @@ export const Chat = () => {
 
       <div className="chat__content">
 
-        <MessagesList messages={messages[id]} deleteMsg={deleteMsg}/>
+      { messages && <MessagesList messages={messages || {}} deleteMsg={deleteMsg}/> }
+
 
         <Form author={author}
             handleChangeAuthor={handleChangeAuthor}
@@ -106,10 +143,15 @@ export const Chat = () => {
         />
 
       </div>
-      <div className={(messages[id]?.length !== 0) ? "" : "display-none"}>
+      <div className={(messages?.length !== 0) ? "" : "display-none"}>
         <MyButton func={toggleTheme}>Theme</MyButton>
       </div>
     </main>
   )
 }
 
+
+
+
+ 
+        

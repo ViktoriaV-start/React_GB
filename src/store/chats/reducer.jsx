@@ -1,7 +1,7 @@
-import { ADD_CHAT, DELETE_CHAT } from "./actions";
+import { ADD_CHAT, DELETE_CHAT, UPDATE_CHATS } from "./actions";
 import { INITIAL_CHATS } from "../../config/constants";
 
-const initialState = INITIAL_CHATS;
+const initialState = [];
  
 export const chatsReducer = (state = initialState, { payload, type }) => {
     switch(type) {
@@ -13,6 +13,10 @@ export const chatsReducer = (state = initialState, { payload, type }) => {
         case DELETE_CHAT: {
             return state.filter(({ id }) => id !== payload);
         }
+        case UPDATE_CHATS: {
+          return [...payload];
+          
+      }
         default:
             return state;
     }

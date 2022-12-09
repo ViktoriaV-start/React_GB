@@ -1,4 +1,4 @@
-import { CHANGE_NAME, CHANGE_EMAIL, TOGGLE_PROFILE } from "./actions";
+import { CHANGE_NAME, CHANGE_EMAIL, TOGGLE_PROFILE,  } from "./actions";
 
 const initialState = {
     name: 'NewName',
@@ -10,9 +10,10 @@ const initialState = {
 export const profileReducer = (state = initialState, action) => {
     switch(action.type) {
         case TOGGLE_PROFILE: {
+
             return {
                 ...state,
-                visible: !state.visible,
+                visible: action.visible,
             }
         }
         case CHANGE_NAME: {

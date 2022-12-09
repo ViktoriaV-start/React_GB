@@ -1,5 +1,5 @@
 import {INITIAL_MESSAGES} from "../../config/constants";
-import {ADD_NEW_MESSAGE, DELETE_MESSAGE, INIT_MESSAGES} from "./actions";
+import {ADD_NEW_MESSAGE, DELETE_MESSAGE, INIT_MESSAGES, UPDATE_MESSAGES, UPDATE_MSGS} from "./actions";
 
 
 const initialState = INITIAL_MESSAGES;
@@ -14,8 +14,17 @@ export const messagesReducer = (state = initialState, { type, payload }) => {
       //TODO записать потом в лекцию синтаксис для всех вариантов в редьюсерах
     }
     case DELETE_MESSAGE: {
-      console.log(payload);
       return {...state, [payload.chatId]: [...state[payload.chatId].filter(({ id }) => id !== payload.msgId)]};
+      //TODO записать потом в лекцию синтаксис для всех вариантов в редьюсерах
+    }
+    case UPDATE_MESSAGES: {
+      //console.log(payload);
+      return {...state, [payload.chatId]: [...payload.messages]};
+      //TODO записать потом в лекцию синтаксис для всех вариантов в редьюсерах
+    }
+    case UPDATE_MSGS: {
+     
+      return {...payload};
       //TODO записать потом в лекцию синтаксис для всех вариантов в редьюсерах
     }
     default:

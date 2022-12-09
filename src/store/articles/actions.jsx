@@ -23,13 +23,13 @@ export const getArticles = () => async (dispatch) => {
     dispatch(getArticlesRequest());
 
     const response = await fetch(API_URL_ART);
-    console.log(response);
+    
     if (!response.ok) {
       throw new Error(`Response failed with status ${response.status}`);
     }
 
     const result = await response.json();
-    console.log(result);
+    
     dispatch(getArticlesSuccess(result));
   } catch (e) {
     console.log(e);

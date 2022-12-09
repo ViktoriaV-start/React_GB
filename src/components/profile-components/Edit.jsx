@@ -6,8 +6,7 @@ export const Edit = ({name,
                       email,
                       visible,
                       showSuccess,
-                      saveEmail,
-                      saveName,
+                      save,
                       saveVisible,
                       changeScreen }) => {
 
@@ -19,6 +18,7 @@ export const Edit = ({name,
     
     const [valueName, setValueName] = useState(name);
     const [valueEmail, setValueEmail] = useState(email);
+    const [valueVisible, setValueVisible] = useState(visible);
     const [alertText, setAlertText] = useState('');
     const [alert, setAlert] = useState('hidden');
 
@@ -37,22 +37,42 @@ export const Edit = ({name,
       
       const regexp = /^([!#$%&*-+{}|?/~\w]+(.?[\w]+)*@([\w-]{1,255}\.)[\w-]{2,4})?$/;
 
-      if (valueName.trim() !== '') {
+      // if (valueName.trim() !== '') {
         
-        saveName(valueName.trim());
-      } else {
+      //   saveName(valueName.trim());
+      // } else {
+      //   showAlert('errorName');
+      //   return;
+      // }
+
+      if (valueName.trim() === '') {
         showAlert('errorName');
         return;
       }
 
+      
       if (!regexp.test(valueEmail.trim())) {
         showAlert('errorEmail');
         return;
       }
 
-      if (valueEmail.trim() !== '') {
-        saveEmail(valueEmail.trim());
+      if (valueEmail.trim() === '') {
+        showAlert('errorEmail');
+        return;
       }
+
+      // if (valueEmail.trim() !== '') {
+      //   saveEmail(valueEmail.trim());
+      // }
+
+      let userObj = {
+        email: valueEmail.trim(),
+        name: valueName.trim(),
+        visible: visible,
+      }
+
+
+     save(userObj);
 
       showSuccess();
       changeScreen();
@@ -76,7 +96,7 @@ export const Edit = ({name,
 
         <div className="profile__user">
 
-          <div className="profile__text">Name:</div>
+          <div className="profile__text">Name*</div>
           <input type="text"
                  className="profile__input-edit"
                  value={valueName}
@@ -86,7 +106,7 @@ export const Edit = ({name,
                  onChange={handleName}
           />
 
-          <div className="profile__text">Email:</div>
+          <div className="profile__text">Email*</div>
           <input type="email"
                  name="email"
                  className="profile__input-edit"
@@ -95,18 +115,22 @@ export const Edit = ({name,
                  required
                  onChange={handleEmail}
                  />
-          <div className="profile__text">Show Email:</div>
+          <div className="profile__text">Show Email</div>
           <input type="checkbox"
                  className="profile__checkbox"
                  checked={visible}
                  onClick={saveVisible}
                  readOnly
                  />
+
+        <p className="auth__required-fields_mg-top auth__text_font-colored">*Required Fields</p>
         </div>
+
+        <button onClick={makeSave} className="auth__button auth__button_font-size-14dark auth__button-login_mg-top" type="submit">SAVE</button>
         
       </div>
     
-      <MyButton func={makeSave}>Save</MyButton>
+      
       
     </div>
     )
