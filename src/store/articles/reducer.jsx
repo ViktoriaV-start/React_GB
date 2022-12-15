@@ -12,6 +12,7 @@ const initialState = {
   error: null,
 };
 
+
 export const articlesReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_ARTICLES_REQUEST: {
@@ -27,3 +28,5 @@ export const articlesReducer = (state = initialState, { type, payload }) => {
       return state;
   }
 };
+
+

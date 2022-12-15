@@ -1,6 +1,6 @@
-import { onValue } from "firebase/database";
+import { onValue, push } from "firebase/database";
 import { ROBOT } from "../../config/constants";
-import { getMsgsRefById, messagesRef } from "../../services/firebase";
+import { getMsgsListRefById, getMsgsRefById, messagesRef } from "../../services/firebase";
 
 export const INIT_MESSAGES = 'MESSAGES::INIT_MESSAGES';
 export const ADD_NEW_MESSAGE = 'MESSAGES::ADD_NEW_MESSAGE';
@@ -69,13 +69,40 @@ export const addMessageWithReply = (chatId, newMsg, slug) => (dispatch) => {
 };
 
 
-let unsubscribe;
+export const addMessageWithReplyFB = (chatId, newMsg, slug) => (dispatch) => {
 
-export const initMessagesTrack = (id) => (dispatch) => {
+  push(getMsgsListRefById(chatId), newMsg);
+
+  if (newMsg.author !== ROBOT) {
+
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+
+    timeout = setTimeout(() => {
+      push(getMsgsListRefById(chatId), {
+        text: 'Your message has been received',
+         author: ROBOT,
+         id: `rob-${Date.now()}-${slug}`,
+      });
+
+    }, 1000);
+  }
 
   
 };
 
-export const stopMessagesTrack = () => () => {
-  unsubscribe(); // при размонтировании - вызывается функция с размонтированием
-};
+
+
+
+
+// let unsubscribe;
+
+// export const initMessagesTrack = (id) => (dispatch) => {
+
+  
+// };
+
+// export const stopMessagesTrack = () => () => {
+//   unsubscribe(); // при размонтировании - вызывается функция с размонтированием
+// };

@@ -10,8 +10,8 @@ import {ThemeContext} from "../ThemeContext";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { selectRelation } from "../../store/relation/selectors";
 import { selectMessages } from "../../store/messages/selectors";
-import {addMessageWithReply, deleteMessage, updateMessages} from "../../store/messages/actions";
-import { getMsgsRefById, messagesRef, getMsgsListRefById, getUserNameRefById, auth } from "../../services/firebase";
+import {addMessageWithReply, addMessageWithReplyFB, deleteMessage, updateMessages} from "../../store/messages/actions";
+import { getMsgsRefById, messagesRef, getMsgsListRefById, getUserNameRefById, auth, db } from "../../services/firebase";
 import { onValue, set, push } from "firebase/database";
 
 
@@ -47,20 +47,24 @@ export const Chat = () => {
   const {toggleTheme} = useContext(ThemeContext);
   const {theme} = useContext(ThemeContext);
 
+
+  // **************************** ДОБАВЛЕНИЕ ОДНОГО СООБЩЕНИЯ *****************************
   const addMessage = (event) => {
     event.preventDefault();
 
     if (msg.trim() === '') {
       return;
-    }
+    };
 
     let newMsg = {
       text: msg,
       author: userName ? userName : 'Guest',
       id: `msg-${Date.now()}-${slug}`,
-    }
+    };
 
-    push(getMsgsListRefById(id), newMsg)
+   // push(getMsgsListRefById(id), newMsg);
+
+    dispatch(addMessageWithReplyFB(id, newMsg, slug));
 
     setMsg('');
     setAuthor('');
@@ -119,8 +123,22 @@ export const Chat = () => {
   // }
   
 
+
+  // **************************** УДАЛЕНИЕ ОДНОГО СООБЩЕНИЯ *****************************
   const deleteMsg = (msgId) => {
-    dispatch(deleteMessage(id, msgId));
+    
+    const unsubscribe = onValue(getMsgsRefById(id), (snapshot) => {
+
+      const val = snapshot.val().messagesList || {};
+
+      if (!snapshot.val()?.exists) {
+        console.log('error loading');
+      } else {
+        set(getMsgsListRefById(id), Object.values(val).filter(({ id }) => id !== msgId ));
+      }
+    });
+    return unsubscribe;
+
   }
 
   return (
@@ -150,8 +168,3 @@ export const Chat = () => {
   )
 }
 
-
-
-
- 
-        

@@ -21,6 +21,8 @@ export const Form = ({author, msg, messages, handleChangeAuthor, handleChangeMsg
                value={msg}
                onChange={handleChangeMsg}
                placeholder="Type your message"/>
-        <button className="chat__btn">Send</button>
+        <button className="chat__btn" type="submit">Send</button>
     </form>;
 }
+
+  
