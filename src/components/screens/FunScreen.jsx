@@ -34,6 +34,7 @@ export const FunScreen = () => {
   }
 
   return (
+    <>
   <div className="container">
 
     {error && <Error closeAlert={closeAlert}>Something went wrong... Try later!</Error>}
@@ -63,8 +64,13 @@ export const FunScreen = () => {
   
       <img className="fun__img" src="/React_GB/img/naruto.webp" alt="Naruto"></img>  
 
-    </div>  
+    </div>
   </div>
+  <div className="video">
+    <a href="https://naruto-official.com/">https://naruto-official.com/</a>
+    <iframe width="810" height="456" src="https://www.youtube.com/embed/yKELA1qBAKA" title="完全新作PV “ROAD OF NARUTO” | アニメ『NARUTO-ナルト-』20周年記念 | studioぴえろ【公式】" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </>
 
   )
 }
