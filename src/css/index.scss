@@ -3,8 +3,8 @@ $special: rgb(170, 205, 205);
 html,
 body {
   height: 100%;
-  font-family: sans-serif;
-  min-width: 1600px;
+  font-family: 'Roboto', sans-serif;
+  min-width: 1400px;
 }
 
 .container {
@@ -12,10 +12,68 @@ body {
   margin: 0 auto;
 }
 
+.wrapper {
+  display: grid;
+  grid-template-columns: 30% 65%;
+  column-gap: 5%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.inactive {
+  color: #000000;
+}
+
+
+
 .h2 {
   color: green;
 }
 
+@import 'norm';
 @import 'form';
 @import 'header';
 @import 'chat';
+@import 'sidebar';
+@import 'navigation';
+@import 'my-button';
+@import 'profile';
+@import 'btn-create';
+@import 'create-chat';
+@import 'fun';
+@import 'auth';
+
+.active {
+  color: #3787b3;
+}
+
+.inactive {
+  color: black;
+}
+
+.display-none {
+  display: none;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.note {
+  height: 64px;
+}
+
+.chats__delete-wrapper {
+  position: absolute;
+  right: 0;
+  background-color: transparent;
+  border: none;
+  margin-top: 15px;
+}
+
+.chats__delete {
+  color: #A7BFD9;
+}
+
