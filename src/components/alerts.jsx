@@ -4,15 +4,12 @@ import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
 import Collapse from '@mui/material/Collapse';
-import Button from '@mui/material/Button';
-// import CloseIcon from '@mui/icons-material/CloseIcon';
+
 
 export const Error = (props) => {
-
-
   return (
     <>
-      <Alert severity="error" onClose={() => props.closeAlert()}>{props.children}</Alert>
+      <Alert severity="error" onClose={props.closeAlert}>{props.children}</Alert>
     </>
   );
 }
@@ -24,9 +21,6 @@ export const Success = () => {
     </>
   );
 }
-
-
-
 
 export default function TransitionAlerts() {
   const [open, setOpen] = React.useState(true);
@@ -53,17 +47,6 @@ export default function TransitionAlerts() {
           Saved successfully!
         </Alert>
       </Collapse>
-
-      {/* <Button
-        disabled={open}
-        variant="outlined"
-        onClick={() => {
-          setOpen(true);
-        }}
-      >
-      
-      </Button> */}
-
     </Box>
   );
 }

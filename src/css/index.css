@@ -12,9 +12,8 @@ body {
 
 .wrapper {
   display: grid;
-  grid-template-columns: 65% 30%;
-  -moz-column-gap: 5%;
-       column-gap: 5%;
+  grid-template-columns: 30% 65%;
+  column-gap: 5%;
 }
 
 a {
@@ -193,7 +192,6 @@ table {
   border-color: #A7BFD9;
   border-radius: 3px;
   font-size: 15px;
-  margin-left: 11px;
   cursor: pointer;
   color: #fff;
   font-weight: 700;
@@ -207,11 +205,30 @@ table {
 .header__btn:hover {
   box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.16);
 }
+.header__icon {
+  width: 20px;
+  fill: white;
+}
+.header__btns {
+  display: flex;
+}
+.header__out {
+  margin-left: 20px;
+  align-self: center;
+  cursor: pointer;
+}
+.header__icon:hover {
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.16);
+  fill: rgb(223, 26, 98);
+}
 
 .chat__salute {
   font-size: 2em;
   color: #3787b3;
   margin-bottom: 1em;
+}
+.chat__content {
+  margin-bottom: 3rem;
 }
 .chat__messages {
   display: grid;
@@ -219,10 +236,11 @@ table {
   grid-column-gap: 2%;
   grid-row-gap: 1em;
   margin-bottom: 1em;
+  align-items: center;
 }
 .chat__inp-wrapper {
   display: grid;
-  grid-template-columns: 18% 60% 18%;
+  grid-template-columns: 80% 18%;
   grid-column-gap: 2%;
 }
 .chat__input {
@@ -256,6 +274,20 @@ table {
 .chat__name {
   text-transform: capitalize;
 }
+.chat__text_light {
+  background-color: #ddf5e8;
+  padding: 6px 0 5px 6px;
+  border-radius: 10% 70% 10% 50%;
+}
+.chat__text_dark {
+  background-color: #fbd3c8;
+  padding: 6px 0 5px 6px;
+  border-radius: 10px 30px;
+}
+.chat__author_clr {
+  color: #075a87;
+  font-weight: 500;
+}
 
 .sidebar__active {
   color: #3787b3;
@@ -272,9 +304,9 @@ table {
 .navigation a {
   position: relative;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 1.1rem;
   line-height: 1.857;
-  color: black;
+  color: rgb(58, 55, 55);
   font-weight: bold;
   text-transform: uppercase;
   padding-bottom: 15px;
@@ -304,10 +336,357 @@ table {
   bottom: 0px;
 }
 
+.btn {
+  width: 130px;
+  height: 45px;
+  align-self: center;
+  border-color: #A7BFD9;
+  border-radius: 3px;
+  font-size: 15px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 700;
+  background-color: #A7BFD9;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+}
+
+.btn:focus {
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.16);
+  outline: none;
+  background-color: #A7BFD9;
+}
+
+.btn:hover {
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.16);
+}
+
+.profile {
+  border-bottom: 1px solid #e8e8e8;
+  padding: 20px 20px 0 30px;
+}
+.profile__head {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #3787b3;
+  margin-bottom: 20px;
+}
+.profile__user {
+  display: grid;
+  grid-template-columns: 15% 40%;
+  align-items: baseline;
+}
+.profile__text {
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  font-size: 18px;
+  color: rgb(34, 34, 34);
+}
+.profile__info, .profile__input-edit, .profile__input {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: rgb(89, 87, 87);
+}
+.profile__input-edit {
+  padding: 5px 0 5px 5px;
+  width: 25rem;
+  height: 3rem;
+  border: 1px solid #eaeaea;
+}
+.profile__input {
+  padding: 5px 0 5px 5px;
+  width: 25rem;
+  height: 3rem;
+  border: 1px solid transparent;
+}
+.profile__input:focus {
+  outline: none;
+}
+.profile__input-edit:focus {
+  outline-color: #3787b3;
+}
+.profile__checkbox {
+  height: 2rem;
+  cursor: pointer;
+  width: 2rem;
+}
+
+.profile:hover {
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.16);
+}
+
+.btn-create {
+  margin-left: 16px;
+  margin-top: 10px;
+  width: 110px;
+  height: 38px;
+  align-self: center;
+  border-color: #f57956;
+  border-radius: 3px;
+  font-size: 15px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 700;
+  background-color: #f57956;
+}
+
+.btn-create:focus {
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.16);
+  outline: none;
+  background-color: #f57956;
+}
+
+.btn-create:hover {
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.16);
+}
+
+.create-chat {
+  padding: 20px;
+  background-color: #eff7f7;
+  box-shadow: 0px 0 50px 5px #a9cdcd;
+}
+.create-chat__form {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 15px;
+  font-size: 0.8em;
+}
+.create-chat__header {
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  color: #3787b3;
+}
+.create-chat__input {
+  padding: 5px 0 5px 5px;
+  height: 2em;
+  font-size: 1.2em;
+}
+.create-chat__alert {
+  height: 32px;
+}
+
+.fun {
+  display: flex;
+  padding: 30px;
+}
+.fun__img {
+  width: 580px;
+}
+.fun__logo {
+  width: 300px;
+}
+.fun__quote {
+  position: relative;
+  width: 510px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 20px;
+}
+.fun__character {
+  margin-top: 200px;
+  font-size: 25px;
+}
+.fun__text {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  font-size: 22px;
+  font-weight: 400;
+}
+.fun__progress {
+  position: absolute;
+  top: 780px;
+  left: 280px;
+}
+.fun__btn {
+  position: absolute;
+  top: 780px;
+  left: 20px;
+}
+
+.video {
+  width: 810px;
+  margin: 50px auto 0;
+}
+
+.auth {
+  margin-top: 100px;
+  border-bottom: 1px solid #e8e8e8;
+}
+.auth__title {
+  font-size: 16px;
+  color: rgb(34, 34, 34);
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-left: 6px;
+}
+.auth__field {
+  border-bottom: 1px solid #e8e8e8;
+}
+.auth__field:hover {
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.16);
+}
+.auth__field-btn {
+  border-color: rgb(234, 234, 234);
+  background-color: rgb(255, 255, 255);
+  width: 1140px;
+  border: none;
+  text-align: left;
+  padding: 30px 0 24px 0;
+}
+.auth__account {
+  display: flex;
+  margin-left: 30px;
+  margin-top: 35px;
+}
+.auth__buyer-status, .auth__log-in {
+  width: 555px;
+}
+.auth__buyer-status, .auth__log-in {
+  width: 555px;
+}
+.auth__text_font-size-13dark {
+  font-size: 16px;
+  color: rgb(34, 34, 34);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.auth__text_font-size-13light {
+  font-size: 13px;
+  color: rgb(179, 178, 178);
+  margin-top: 14px;
+}
+.auth__check_mg-top {
+  margin-top: 28px;
+}
+.auth__checkout-guest {
+  margin-left: 25px;
+}
+.auth__checkout-guest, .auth__register {
+  margin-left: 18px;
+}
+.auth__text_font-size-12dark {
+  font-size: 12px;
+  color: rgb(34, 34, 34);
+  text-transform: uppercase;
+}
+.auth__reg_mg-top {
+  margin-top: 15px;
+}
+.auth__save-time_mg {
+  margin-top: 28px;
+}
+.auth__text_mrg-top {
+  margin-top: 33px;
+}
+.auth__button {
+  border-color: rgb(234, 234, 234);
+  background-color: rgb(255, 255, 255);
+  width: 184px;
+  height: 54px;
+  margin-bottom: 80px;
+}
+.auth__button:hover {
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.16);
+}
+.auth__button:focus {
+  outline: none;
+}
+.auth__button_font-size-14dark {
+  font-size: 14px;
+  color: rgb(74, 74, 74);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.auth__button-continue_mg-top {
+  margin-top: 38px;
+}
+.auth__email-adr_mg-top {
+  margin-top: 23px;
+}
+.auth_text-spec {
+  color: rgb(255, 13, 13);
+  font-size: 16px;
+}
+.auth__email-input_mg-top, .auth__passowrd-input_mg-top {
+  margin-top: 14px;
+}
+.auth__email-input, .auth__password-input {
+  width: 390px;
+  height: 44px;
+  border: 1px solid #eaeaea;
+  font-size: 15px;
+  color: rgb(34, 34, 34);
+  padding-left: 5px;
+}
+.auth__email-input:focus, .auth__password-input:focus {
+  outline-color: #f16d7f;
+}
+.auth__password_mg-top, .auth__required-fields_mg-top {
+  margin-top: 18px;
+}
+.auth__text_font-colored {
+  font-size: 13px;
+  color: rgb(255, 13, 13);
+}
+.auth__button-login_mg-top {
+  margin-top: 29px;
+}
+.auth__forgot-link_mrg-left {
+  margin-left: 31px;
+}
+.auth__forgot-link {
+  text-decoration: none;
+}
+.auth__text_font-size-14dark {
+  font-size: 14px;
+  color: rgb(34, 34, 34);
+}
+
+.fake-chbx,
+.fake-chbx-reg {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgb(85, 85, 85);
+  background-color: transparent;
+  position: relative;
+}
+
+.auth:hover {
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.16);
+}
+
 .active {
   color: #3787b3;
 }
 
 .inactive {
   color: black;
+}
+
+.display-none {
+  display: none;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.note {
+  height: 64px;
+}
+
+.chats__delete-wrapper {
+  position: absolute;
+  right: 0;
+  background-color: transparent;
+  border: none;
+  margin-top: 15px;
+}
+
+.chats__delete {
+  color: #A7BFD9;
 }/*# sourceMappingURL=index.css.map */

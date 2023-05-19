@@ -1,6 +1,6 @@
-import { onValue, push } from "firebase/database";
+import { push } from "firebase/database";
 import { ROBOT } from "../../config/constants";
-import { getMsgsListRefById, getMsgsRefById, messagesRef } from "../../services/firebase";
+import { getMsgsListRefById } from "../../services/firebase";
 
 export const INIT_MESSAGES = 'MESSAGES::INIT_MESSAGES';
 export const ADD_NEW_MESSAGE = 'MESSAGES::ADD_NEW_MESSAGE';
@@ -42,9 +42,6 @@ export const updateMsgs = (messages) => ({
   type: UPDATE_MSGS,
   payload: messages
 });
-
-
-
 
 let timeout;
 
@@ -88,21 +85,4 @@ export const addMessageWithReplyFB = (chatId, newMsg, slug) => (dispatch) => {
 
     }, 1000);
   }
-
-  
 };
-
-
-
-
-
-// let unsubscribe;
-
-// export const initMessagesTrack = (id) => (dispatch) => {
-
-  
-// };
-
-// export const stopMessagesTrack = () => () => {
-//   unsubscribe(); // при размонтировании - вызывается функция с размонтированием
-// };

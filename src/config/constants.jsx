@@ -3,7 +3,6 @@ export const ROBOT = "Robot";
 export const API_URL_ART = "https://animechan.vercel.app/api/random/anime?title=naruto";
 
 
-
 export const INITIAL_CHATS = [
   {
     id: 'chat-1',
@@ -34,7 +33,6 @@ export const INITIAL_CHATS = [
   },
 ];
 
-
 export const INITIAL_MESSAGES = INITIAL_CHATS.reduce((acc, chat) => {
   acc[chat.id] = [];
   return acc;
@@ -51,5 +49,3 @@ export const FETCH_STATUSES = {
   FAILURE: 'failure',
   SUCCESS: 'success',
 }
-
-

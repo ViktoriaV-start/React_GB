@@ -1,6 +1,3 @@
-
-
-
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -48,26 +45,14 @@ export const logOut = async () => {
 export const usersRef = ref(db, 'users'); 
 // реф-функция from 'firebase/database' (самаБД, 'конкретный интересующий участок с данными - строка')
 
-
-
-
 export const getUserRefById = (id) => ref(db, `users/${id}`); // ссылка на коокретный раздел в user в firebase
-
-
 export const userEmailRef = ref(db, 'user/email'); 
-
 export const userVisibleRef = (id) => ref(db, `users/${id}/visible`);
-
 export const relationsRef = ref(db, 'relations');
 export const chatsRef = ref(db, 'chats');
 export const messagesRef = ref(db, 'messages');
-
 export const getChatRefById = (id) => ref(db, `chats/${id}`);
-
 export const getMsgsRefById = (id) => ref(db, `messages/${id}`);
-
 export const getRelationRefById = (slug) => ref(db, `relations/${slug}`);
-
 export const getMsgsListRefById = (id) => ref(db, `messages/${id}/messagesList`);
-
 export const getUserNameRefById = () => ref(db, `users/${auth.currentUser.uid}/name`);

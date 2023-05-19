@@ -6,35 +6,20 @@ import {Form} from "./Form"
 
 import {MyButton} from "../MyButton";
 import {ThemeContext} from "../ThemeContext";
-//import {OutletContext} from "../OutletContext";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { selectRelation } from "../../store/relation/selectors";
 import { selectMessages } from "../../store/messages/selectors";
-import {addMessageWithReply, addMessageWithReplyFB, deleteMessage, updateMessages} from "../../store/messages/actions";
+import { addMessageWithReplyFB, updateMessages} from "../../store/messages/actions";
 import { getMsgsRefById, messagesRef, getMsgsListRefById, getUserNameRefById, auth, db } from "../../services/firebase";
 import { onValue, set, push } from "firebase/database";
 
 
 export const Chat = () => {
 
-
-  // ЭТО КУСОК КОДА - ДАННЫЕ ПЕРЕДАЮТСЯ ИЗ КОНТЕКСТА ИЗ РОДИТЕЛЯ, ПОТОМУ ЧТО В OUTLET НАПРЯМУЮ
-  // НЕ ПОЛУЧАЕТСЯ ПЕРЕДАТЬ ДАННЫЕ ПРОПСАМИ
-  //const messages = (useContext(OutletContext)).messages;
-  //const setMessages = (useContext(OutletContext)).setMessages;
-  //const relation = (useContext(OutletContext)).relation;
-
-  
-  // dispatch(addMessageWithReply(id, newMsg, slug));
-
-
-
   const dispatch = useDispatch();
 
   const relation = useSelector(selectRelation, shallowEqual);
-  //const [messages, setMessages] = useState([]);
   const messagesStore = useSelector(selectMessages, shallowEqual); 
-  
   const [msg, setMsg] = useState('');
   const [author, setAuthor] = useState('');
   const {slug} = useParams(); //взять только значение из приходящего объекта ключ/значение
@@ -61,8 +46,6 @@ export const Chat = () => {
       author: userName ? userName : 'Guest',
       id: `msg-${Date.now()}-${slug}`,
     };
-
-   // push(getMsgsListRefById(id), newMsg);
 
     dispatch(addMessageWithReplyFB(id, newMsg, slug));
 
@@ -111,17 +94,9 @@ export const Chat = () => {
 
   }, [msg]);
 
-
-  // if (!messages[id]) {
-  //   return <Navigate to='/chats' replace/>
-  // }
   if (!id) {
     return <Navigate to='/chats' replace/>
   }
-  //  if (!messages) {
-  //   return <Navigate to='/chats' replace/>
-  // }
-  
 
 
   // **************************** УДАЛЕНИЕ ОДНОГО СООБЩЕНИЯ *****************************

@@ -1,5 +1,5 @@
 import { onValue } from "firebase/database";
-import { relationRef, relationsRef } from "../../services/firebase";
+import { relationsRef } from "../../services/firebase";
 
 export const ADD_RELATION = 'RELATION::ADD_RELATION';
 export const DELETE_RELATION = 'RELATION::DELETE_RELATION';
@@ -15,13 +15,10 @@ export const deleteRelation = (slug) => ({
   payload: slug,
 });
 
-
 export const updateRelations = (relations) => ({
   type: UPDATE_RELATIONS,
   payload: relations,
 });
-
-
 
 let unscribe;
 
@@ -42,4 +39,3 @@ export const initRelationsTrack = () => (dispatch) => {
 export const stopRelationsTrack = () => () => {
   unscribe(); // при размонтировании - вызывается функция с размонтированием
 };
-

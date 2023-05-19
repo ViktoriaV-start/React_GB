@@ -20,4 +20,3 @@ export const relationReducer = (state = initialState, { payload, type }) => {
             return state;
     }
 };
-

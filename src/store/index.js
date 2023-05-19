@@ -45,10 +45,11 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer); 
 
-
+// ПОДКЛЮЧЕНИЕ redux-thunk
 export const composeEnhancers =
 window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const store = createStore(persistedReducer, composeEnhancers(applyMiddleware(thunk)));
+// ПОДКЛЮЧЕНИЕ redux-thunk
 
 export const persistor = persistStore(store);

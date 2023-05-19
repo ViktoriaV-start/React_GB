@@ -1,5 +1,4 @@
 import { ADD_CHAT, DELETE_CHAT, UPDATE_CHATS } from "./actions";
-import { INITIAL_CHATS } from "../../config/constants";
 
 const initialState = [];
  

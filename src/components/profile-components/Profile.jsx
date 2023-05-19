@@ -1,19 +1,14 @@
-import { NavLink } from "react-router-dom"
+
 import TransitionAlerts from "../alerts"
-import { MyButton } from "../MyButton"
 
 export const Profile = ({name, email, alert, visible, saveVisible, changeScreen}) => {
   return (
-  <main className="profile__wrapper container">
-    
+    <main className="profile__wrapper container">
       <div className="profile"> 
-
         <div className="profile__head">PROFILE PAGE</div>
-
         <div className={alert}>
           <TransitionAlerts />
         </div>
-
         <div className="profile__user">
 
           <div className="profile__text">Name</div>
@@ -31,7 +26,8 @@ export const Profile = ({name, email, alert, visible, saveVisible, changeScreen}
                  
                  readOnly
                  />
-          <div className="profile__text">Show Email</div>       
+          <div className="profile__text">Show Email</div>
+
           <input type="checkbox"
                  className="profile__checkbox"
                  checked={visible}
@@ -39,13 +35,9 @@ export const Profile = ({name, email, alert, visible, saveVisible, changeScreen}
                  readOnly
                  />
 
-
-        <button onClick={changeScreen} className="auth__button auth__button_font-size-14dark auth__button-login_mg-top" type="submit">EDIT</button>
-    
+          <button onClick={changeScreen} className="auth__button auth__button_font-size-14dark auth__button-login_mg-top" type="submit">EDIT</button>
         </div>
-        
       </div>
-            
     </main>
     )
 }

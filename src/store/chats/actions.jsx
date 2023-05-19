@@ -21,7 +21,6 @@ export const updateChats = (chatsArr) => ({
 });
 
 
-
 let unscribe;
 
 export const initChatsTrack = () => (dispatch) => {
@@ -33,7 +32,6 @@ export const initChatsTrack = () => (dispatch) => {
     dispatch(updateChats(Object.values(snapshot.val() || {} )));
    
   });
-
 
   unscribe = () => { // переприсваиваем в unscribe функции для отписки от отслеживания событий, здесь не вызываем
     unsubscribeChats();

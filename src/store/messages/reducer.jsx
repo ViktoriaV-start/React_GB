@@ -11,21 +11,16 @@ export const messagesReducer = (state = initialState, { type, payload }) => {
     }
     case ADD_NEW_MESSAGE: {
       return {...state, [payload.chatId]: [...state[payload.chatId], payload.newMsg]};
-      //TODO записать потом в лекцию синтаксис для всех вариантов в редьюсерах
     }
     case DELETE_MESSAGE: {
       return {...state, [payload.chatId]: [...state[payload.chatId].filter(({ id }) => id !== payload.msgId)]};
-      //TODO записать потом в лекцию синтаксис для всех вариантов в редьюсерах
     }
     case UPDATE_MESSAGES: {
-      //console.log(payload);
       return {...state, [payload.chatId]: [...payload.messages]};
-      //TODO записать потом в лекцию синтаксис для всех вариантов в редьюсерах
     }
     case UPDATE_MSGS: {
      
       return {...payload};
-      //TODO записать потом в лекцию синтаксис для всех вариантов в редьюсерах
     }
     default:
       return state;

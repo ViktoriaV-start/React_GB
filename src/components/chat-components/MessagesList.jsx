@@ -5,11 +5,7 @@ import {ThemeContext} from "../ThemeContext";
 
 export const MessagesList = ({ messages, deleteMsg }) => {
 
-
   const {theme} = useContext(ThemeContext);
-  // Деструктурировали пришедший из контекста объект и вытащили значение
-  //  по ключу theme
-
 
   const getName = (author) => {
     if (author !== ROBOT) {
@@ -20,8 +16,6 @@ export const MessagesList = ({ messages, deleteMsg }) => {
       }
     }
   };
-
- 
 
   return <div className="chat__list">
     {messages.map((item) =>

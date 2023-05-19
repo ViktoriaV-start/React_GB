@@ -96,12 +96,10 @@ export const ChatsMarkup = ({
 
               <span>Chat name shortly</span>
               <input className="create-chat__input"
-                // ref={inputRef}
                      type="text"
                      value={chatSlug}
                      onChange={handleChatSlug}
               />
-              
 
               <button onClick={addNewChat} className="chat__btn" type="button">Save</button>
               
@@ -111,7 +109,6 @@ export const ChatsMarkup = ({
           <Error>{alertText}</Error>
               </div>
         </List>
-        
       </div>
   )
 }

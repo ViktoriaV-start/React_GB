@@ -2,9 +2,6 @@ import * as React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useState } from "react";
 import { ThemeContext } from "./components/ThemeContext";
-
-
-
 import { Provider } from 'react-redux'; // это провайдер из редакса, в который оборачиваем весь объект, 
 import { persistor, store } from "./store"; // это сам стор, который создали в файле src/store/index.jsx
 import { PersistGate } from "redux-persist/integration/react";
@@ -15,9 +12,6 @@ import { AppRoutes } from './components/common/AppRoutes';
 import { useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './services/firebase';
-
-
-
 
 
 export const App = () => {
@@ -68,7 +62,6 @@ export const App = () => {
     <PersistGate persistor={persistor}>
       {/* ЭТО ДЛЯ LOCAL-STORAGE */}
 
-
       <Provider store={store}> 
         {/* ЭТО ПРОВАЙДЕР РЕДАКСА */}
 
@@ -79,15 +72,10 @@ export const App = () => {
 
           <Header authed={authed} />
           <Navigation setActive={setActive} setClassName={setClassName} />
-
           <AppRoutes authed={authed}/>
-        
         </ThemeContext.Provider>
-
       </Provider>
-
     </PersistGate>
-       
     );
 }
 

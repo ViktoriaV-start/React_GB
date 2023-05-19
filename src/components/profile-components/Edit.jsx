@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Error } from "../alerts";
 import { MyButton } from "../MyButton";
 
+const hiddenAlert = 'hidden';
+
 export const Edit = ({name,
                       email,
                       visible,
@@ -20,7 +22,7 @@ export const Edit = ({name,
     const [valueEmail, setValueEmail] = useState(email);
     const [valueVisible, setValueVisible] = useState(visible);
     const [alertText, setAlertText] = useState('');
-    const [alert, setAlert] = useState('hidden');
+    const [alert, setAlert] = useState(hiddenAlert);
 
     const handleName = (event) => {
       return setValueName(event.target.value);
@@ -34,23 +36,13 @@ export const Edit = ({name,
     }
 
     const makeSave = () => {
-      
       const regexp = /^([!#$%&*-+{}|?/~\w]+(.?[\w]+)*@([\w-]{1,255}\.)[\w-]{2,4})?$/;
-
-      // if (valueName.trim() !== '') {
-        
-      //   saveName(valueName.trim());
-      // } else {
-      //   showAlert('errorName');
-      //   return;
-      // }
 
       if (valueName.trim() === '') {
         showAlert('errorName');
         return;
       }
 
-      
       if (!regexp.test(valueEmail.trim())) {
         showAlert('errorEmail');
         return;
@@ -61,27 +53,20 @@ export const Edit = ({name,
         return;
       }
 
-      // if (valueEmail.trim() !== '') {
-      //   saveEmail(valueEmail.trim());
-      // }
-
       let userObj = {
         email: valueEmail.trim(),
         name: valueName.trim(),
         visible: visible,
       }
-
-
-     save(userObj);
-
+      save(userObj);
       showSuccess();
       changeScreen();
-
       return;
     }
 
-
-
+    const closeAlert = () => {
+      setAlert(hiddenAlert);
+    };
 
   return (
     <div className="profile__wrapper container">
@@ -91,7 +76,7 @@ export const Edit = ({name,
         <div className="profile__head">EDIT PROFILE</div>
 
         <div className={"note "+ alert}>
-          <Error>{alertText}</Error>
+          <Error closeAlert={closeAlert} >{alertText}</Error>
         </div>
 
         <div className="profile__user">
@@ -122,16 +107,10 @@ export const Edit = ({name,
                  onClick={saveVisible}
                  readOnly
                  />
-
-        <p className="auth__required-fields_mg-top auth__text_font-colored">*Required Fields</p>
+          <p className="auth__required-fields_mg-top auth__text_font-colored">*Required Fields</p>
         </div>
-
         <button onClick={makeSave} className="auth__button auth__button_font-size-14dark auth__button-login_mg-top" type="submit">SAVE</button>
-        
       </div>
-    
-      
-      
     </div>
     )
 }
