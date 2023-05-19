@@ -1,0 +1,63 @@
+.profile {
+  border-bottom: 1px solid #e8e8e8;
+  padding: 20px 20px 0 30px;
+
+  &__head {
+    font-size: 2rem;
+    font-weight: 500;
+    color: #3787b3;
+    margin-bottom: 20px;
+  }
+
+  &__user {
+    display: grid;
+    grid-template-columns: 15% 40%;
+    align-items: baseline;
+  }
+  
+  &__text {
+    // font-size: 1.1rem;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    font-size: 18px;
+    color: rgb(34, 34, 34);
+  }
+
+  &__info, &__input-edit, &__input {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: rgb(89, 87, 87);
+  }
+
+&__input-edit {
+  padding: 5px 0 5px 5px;
+  width: 25rem;
+  height: 3rem;
+  border: 1px solid #eaeaea;
+}
+
+&__input {
+  padding: 5px 0 5px 5px;
+  width: 25rem;
+  height: 3rem;
+  border: 1px solid transparent;
+}
+
+&__input:focus {
+  outline: none
+}
+
+  &__input-edit:focus {
+    outline-color: #3787b3;
+  }
+
+  &__checkbox {
+    height: 2rem;
+    cursor: pointer;
+    width: 2rem;
+  }
+} 
+
+.profile:hover {
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.16);
+}
