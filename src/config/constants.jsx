@@ -1,6 +1,8 @@
 
 export const ROBOT = "Robot";
-export const API_URL_ART = "https://animechan.vercel.app/api/random/anime?title=naruto";
+export const API_URL_ART = "http://animechan.melosh.space/random/anime?title=naruto";
+
+//"https://animechan.vercel.app/api/random/anime?title=naruto";
 
 
 export const INITIAL_CHATS = [
