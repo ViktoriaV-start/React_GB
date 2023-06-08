@@ -40,8 +40,8 @@ export const FunScreen = () => {
             {/* <div className="fun__character">{articles.character}</div>
             <p className="fun__text">{articles.quote}</p> */}
 
-            {/* <div className="fun__character">{articles.data.title}</div>
-            <div className="fun__character">{articles.data.title_english}</div> */}
+            <div className="fun__character">{articles.data.title}</div>
+            <div className="fun__character">{articles.data.title_english}</div>
 
 
           </div>
@@ -59,18 +59,18 @@ export const FunScreen = () => {
         <img className="fun__img" src="/React_GB/img/naruto.webp" alt="Naruto"></img>  
     </div>
   </div>
-  <div className="video">
+  {/* <div className="video">
     <a href="https://naruto-official.com/">https://naruto-official.com/</a>
     <iframe width="810" height="456"
     src="https://www.youtube.com/embed/yKELA1qBAKA"
-    title="完全新作PV 'ROAD OF NARUTO' | アニメ『NARUTO-ナルト-』20周年記念 | studioぴえろ【公式】"
+    title="'ROAD OF NARUTO'"
     frameBorder="0"
     // allow="accelerometer; autoplay; clipboard-write; encrypted-media;
     // gyroscope; picture-in-picture"
     allow='autoplay; encrypted-media'
     allowFullScreen>
     </iframe>
-  </div>
+  </div> */}
   </>
   )
 }
