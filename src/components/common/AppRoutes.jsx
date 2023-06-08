@@ -27,11 +27,23 @@ export const AppRoutes = ({ authed }) => {
         <Route path="" element={<ProfileScreen />} />
       </Route>
 
+      <Route path="/React_GB/profile" element={<PrivateRoute authed={authed} />}>
+        <Route path="" element={<ProfileScreen />} />
+      </Route>
+
+      
+
+      
+
       <Route path="/fun" element={<FunScreen />} />
+      <Route path="/React_GB/fun" element={<FunScreen />} />
   
       <Route path="/chats" element={<ChatScreen authed={authed} />}>
         <Route path=":slug" element={<Chat />} />
          {/* Это children, то, что идет в <Outlet /> */}
+      </Route>
+      <Route path="/React_GB/chats" element={<ChatScreen authed={authed} />}>
+        <Route path=":slug" element={<Chat />} />
       </Route>
   
       <Route path="*" element={<h4>404</h4>} />
