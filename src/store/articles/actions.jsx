@@ -29,6 +29,8 @@ export const getArticles = () => async (dispatch) => {
     }
 
     const result = await response.json();
+
+    console.log(result.data);
     
     dispatch(getArticlesSuccess(result));
   } catch (e) {

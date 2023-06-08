@@ -1,6 +1,7 @@
 
 export const ROBOT = "Robot";
-export const API_URL_ART = "http://animechan.melosh.space/random/anime?title=naruto";
+export const API_URL_ART = "https://api.jikan.moe/v4/random/anime";
+//"http://animechan.melosh.space/random/anime?title=naruto";
 
 //"https://animechan.vercel.app/api/random/anime?title=naruto";
 
