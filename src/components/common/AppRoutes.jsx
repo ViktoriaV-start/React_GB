@@ -13,38 +13,26 @@ export const AppRoutes = ({ authed }) => {
   return (
     <Routes>
 
-      <Route path="/React_GB" element={<PublicRoute authed={authed} />}>
-        <Route path="" element={<HomeScreen />} />
-        <Route path="signup" element={<HomeScreen />} />
-      </Route>
-
       <Route path="/" element={<PublicRoute authed={authed} />}>
         <Route path="" element={<HomeScreen />} />
         <Route path="signup" element={<HomeScreen  />} />
       </Route>
 
-      <Route path="/React_GB/profile" element={<PrivateRoute authed={authed} />}>
-        <Route path="" element={<ProfileScreen />} />
+      <Route path="/React_GB" element={<PublicRoute authed={authed} />}>
+        <Route path="" element={<HomeScreen />} />
+        <Route path="signup" element={<HomeScreen />} />
       </Route>
-      
+
       <Route path="/profile" element={<PrivateRoute authed={authed} />}>
         <Route path="" element={<ProfileScreen />} />
       </Route>
 
-
-
-      
-
-      
-      <Route path="/React_GB/fun" element={<FunScreen />} />
       <Route path="/fun" element={<FunScreen />} />
+      <Route path="/React_GB/fun" element={<FunScreen />} />
   
       <Route path="/chats" element={<ChatScreen authed={authed} />}>
         <Route path=":slug" element={<Chat />} />
          {/* Это children, то, что идет в <Outlet /> */}
-      </Route>
-      <Route path="/React_GB/chats" element={<ChatScreen authed={authed} />}>
-        <Route path=":slug" element={<Chat />} />
       </Route>
   
       <Route path="*" element={<h4>404</h4>} />
