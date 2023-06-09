@@ -70,7 +70,7 @@ export const Chat = () => {
       if (!snapshot.val()?.exists) {
         console.log('error loading');
       } else {
-        
+
         dispatch(updateMessages(id, (Object.values(val.messagesList || {}))));
       }
     });
@@ -84,9 +84,6 @@ export const Chat = () => {
       const unsubscribe = onValue(getUserNameRefById(), (snapshot) => {
 
         const val = snapshot.val();
-
-        console.log(val)
-  
         setUserName(val);
      });
       return unsubscribe;

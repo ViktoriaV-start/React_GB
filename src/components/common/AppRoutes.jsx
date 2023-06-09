@@ -28,8 +28,7 @@ export const AppRoutes = ({ authed }) => {
       </Route>
 
       <Route path="/fun" element={<FunScreen />} />
-      <Route path="/React_GB/fun" element={<FunScreen />} />
-  
+
       <Route path="/chats" element={<ChatScreen authed={authed} />}>
         <Route path=":slug" element={<Chat />} />
          {/* Это children, то, что идет в <Outlet /> */}
