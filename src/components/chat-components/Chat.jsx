@@ -92,7 +92,7 @@ export const Chat = () => {
   }, [msg]);
 
   if (!id) {
-    return <Navigate to='/React_GB/chats' replace/>
+    return <Navigate to='/chats' replace/>
   }
 
 

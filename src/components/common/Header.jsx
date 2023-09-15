@@ -15,7 +15,7 @@ export const Header = ({ authed }) => {
             </NavLink>
             : 
             <>
-            <NavLink to="/React_GB/profile">
+            <NavLink to="/profile">
               <MyButton>Profile</MyButton>
             </NavLink>
 
