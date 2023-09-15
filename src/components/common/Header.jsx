@@ -10,12 +10,12 @@ export const Header = ({ authed }) => {
         <span className="header__name">LET'S CHAT====</span>
         <div className="header__btns">
         { !authed ? 
-            <NavLink to="/">
+            <NavLink to="/React_GB">
               <MyButton>Login</MyButton>
             </NavLink>
             : 
             <>
-            <NavLink to="/profile">
+            <NavLink to="/React_GB/profile">
               <MyButton>Profile</MyButton>
             </NavLink>
 
