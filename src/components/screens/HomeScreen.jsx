@@ -6,8 +6,8 @@ import { Error } from "../alerts";
 
 export const HomeScreen = () => {
 
-  const [login, setLogin] = useState('');
-  const [pass, setPass] = useState('');
+  const [login, setLogin] = useState('alex@gmail.com');
+  const [pass, setPass] = useState('123456');
   const [newLogin, setNewLogin] = useState('');
   const [newPass, setNewPass] = useState('');
   const [error, setError] = useState('');
