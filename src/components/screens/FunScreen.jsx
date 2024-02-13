@@ -40,8 +40,9 @@ export const FunScreen = () => {
             {/* <div className="fun__character">{articles.character}</div>
             <p className="fun__text">{articles.quote}</p> */}
 
-            <div className="fun__character">{articles.data.title}</div>
-            <div className="fun__character">{articles.data.title_english}</div>
+
+            <div className="fun__character">{(articles.data.title) ? articles.data.title : "Title"}</div>
+            <div className="fun__character">{(articles.data.title_english) ? articles.data.title_english : ""}</div>
 
 
           </div>
