@@ -37,7 +37,7 @@ export const App = () => {
     };
 
   const setClassName = () => {
-    if (pathname === '/chats') {
+    if (pathname === '/React_GB/chats') {
       return "navigation__active";
     } else {
       return "inactive";
