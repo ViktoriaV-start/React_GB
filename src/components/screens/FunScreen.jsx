@@ -41,8 +41,8 @@ export const FunScreen = () => {
             <p className="fun__text">{articles.quote}</p> */}
 
 
-            <div className="fun__character">{(articles.data.title) ? articles.data.title : "Title"}</div>
-            <div className="fun__character">{(articles.data.title_english) ? articles.data.title_english : ""}</div>
+            <div className="fun__character">{(articles.data && articles.data.title) ? articles.data.title : "Title"}</div>
+            <div className="fun__character">{(articles.data && articles.data.title_english) ? articles.data.title_english : ""}</div>
 
 
           </div>
