@@ -113,7 +113,7 @@ export const HomeScreen = () => {
                       type="submit">
                        LOG IN
               </button>
-              <a href="#" className="auth__forgot-link auth__forgot-link_mrg-left auth__text_font-size-14dark">Forgot Password?</a>
+              <a href="/" className="auth__forgot-link auth__forgot-link_mrg-left auth__text_font-size-14dark">Forgot Password?</a>
             </fieldset>
           </form>
         </div>

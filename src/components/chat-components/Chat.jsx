@@ -10,7 +10,7 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { selectRelation } from "../../store/relation/selectors";
 import { selectMessages } from "../../store/messages/selectors";
 import { addMessageWithReplyFB, updateMessages} from "../../store/messages/actions";
-import { getMsgsRefById, messagesRef, getMsgsListRefById, getUserNameRefById, auth, db } from "../../services/firebase";
+import { getMsgsRefById, getMsgsListRefById, getUserNameRefById, auth, db } from "../../services/firebase";
 import { onValue, set, push } from "firebase/database";
 
 
