@@ -35,7 +35,7 @@ export const FunScreen = () => {
       {error && <Error closeAlert={closeAlert}>Something went wrong... Try later!</Error>}
       <div className="fun">
         <div className="fun__quote">
-          <h2 className="fun__h2">The Rick and Morty</h2>
+          <h2 className="fun__h2">Rick and Morty</h2>
           <div className='fun__res'>
             <img src={articles.image} alt="Character" />
             <div className="fun__character">{(articles) ? articles.name : "Character"}</div>
