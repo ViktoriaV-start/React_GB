@@ -35,18 +35,14 @@ export const FunScreen = () => {
       {error && <Error closeAlert={closeAlert}>Something went wrong... Try later!</Error>}
       <div className="fun">
         <div className="fun__quote">
-          <img className="fun__logo" src="/React_GB/img/naruto1_logo.webp" alt="Naruto"></img>
-          <div>
-            {/* <div className="fun__character">{articles.character}</div>
-            <p className="fun__text">{articles.quote}</p> */}
-						
-						<div className="fun__character">{(articles && articles.character) ? articles.character : "Title"}</div>
-						<p className="fun__text">{(articles && articles.quote) ? articles.quote : ""}</p>
-
+          <h2 className="fun__h2">The Rick and Morty</h2>
+          <div className='fun__res'>
+            <img src={articles.image} alt="Character" />
+            <div className="fun__character">{(articles) ? articles.name : "Character"}</div>
           </div>
 
           <div className="fun__btn">
-            <MyButton func={sendRequest}>New quote</MyButton>
+            <MyButton func={sendRequest}>New</MyButton>
           </div>
 
           <div className="fun__progress">
@@ -54,8 +50,11 @@ export const FunScreen = () => {
           </div>
 
         </div>
-
-        <img className="fun__img" src="/React_GB/img/naruto.webp" alt="Naruto"></img>  
+        <div className="fun__anime">
+          <img className="fun__logo" src="/React_GB/img/naruto1_logo.webp" alt="Naruto"></img>
+          <img className="fun__img" src="/React_GB/img/naruto.webp" alt="Naruto"></img>
+        </div>
+        
     </div>
   </div>
   {/* <div className="video">
@@ -73,5 +72,3 @@ export const FunScreen = () => {
   </>
   )
 }
-
-

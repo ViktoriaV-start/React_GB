@@ -22,14 +22,15 @@ export const getArticles = () => async (dispatch) => {
   try {
     dispatch(getArticlesRequest());
 
-    const response = await fetch(API_URL_ART);
-    
+    let randomNum = Math.round(0.5 + Math.random() * 20);
+
+    const response = await fetch(`${API_URL_ART}/${randomNum}`);
+
     if (!response.ok) {
       throw new Error(`Response failed with status ${response.status}`);
     }
 
     const result = await response.json();
-
     dispatch(getArticlesSuccess(result));
   } catch (e) {
     console.log(e);

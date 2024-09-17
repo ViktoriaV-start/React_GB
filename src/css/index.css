@@ -468,11 +468,12 @@ table {
 }
 
 .fun {
-  display: flex;
-  padding: 30px;
+  display: grid;
+  padding: 30px 30px 100px;
+  grid-template-columns: 1fr 1fr;
 }
 .fun__img {
-  width: 580px;
+  width: 480px;
 }
 .fun__logo {
   width: 300px;
@@ -483,10 +484,10 @@ table {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0 20px;
+  padding: 40px 20px 0;
 }
 .fun__character {
-  margin-top: 200px;
+  margin-top: 25px;
   font-size: 25px;
 }
 .fun__text {
@@ -504,6 +505,16 @@ table {
   position: absolute;
   top: 780px;
   left: 20px;
+}
+.fun__anime {
+  text-align: center;
+}
+.fun__h2 {
+  font-size: 50px;
+  color: #946423;
+}
+.fun__res {
+  margin-top: 75px;
 }
 
 .video {
