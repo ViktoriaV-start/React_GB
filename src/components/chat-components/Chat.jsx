@@ -115,7 +115,7 @@ export const Chat = () => {
 
   return (
     <main className="chat">
-      <div className="chat__salute">Hello, {name}, welcome to our
+      <div className="chat__salute">Hello, {userName ? userName : name}, welcome to our
         <span className="chat__name"> {slug}</span> chat!
       </div>
 
